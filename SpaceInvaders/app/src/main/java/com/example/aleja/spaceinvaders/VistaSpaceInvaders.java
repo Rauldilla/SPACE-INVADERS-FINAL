@@ -215,7 +215,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable{
             canvas = ourHolder.lockCanvas();
 
             // Dibuja el color del fondo
-            canvas.drawColor(Color.argb(0, 0, 0, 0));
+            canvas.drawColor(Color.argb(0, 0, 0, 0),PorterDuff.Mode.CLEAR);
 
             // Escoje el color de la brocha para dibujar
             paint.setColor(Color.argb(255, 255, 255, 255));
