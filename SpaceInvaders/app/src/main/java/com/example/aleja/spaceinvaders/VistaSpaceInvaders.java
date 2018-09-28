@@ -226,13 +226,13 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable{
             // Dibuja a los invaders
             // Dibuja a los invaders
             for(int i = 0; i < numMarcianitos; i++){
-               // if(invaders[i].getVisibility()) {
+               if(marcianito[i].getVisibility()) {
                     //if(uhOrOh) {
                         canvas.drawBitmap(marcianito[i].getBitmap(), marcianito[i].getX(), marcianito[i].getY(), paint);
                     //}else{
                         //canvas.drawBitmap(invaders[i].getBitmap2(), invaders[i].getX(), invaders[i].getY(), paint);
                     //}
-               //}
+               }
             }
 
 
