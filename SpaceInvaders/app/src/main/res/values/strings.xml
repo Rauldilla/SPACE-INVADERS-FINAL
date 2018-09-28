@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SpaceInvaders</string>
+    <string name="enter_age">Introduzca la edad</string>
+    <string name="confirm">Confirmo</string>
 </resources>

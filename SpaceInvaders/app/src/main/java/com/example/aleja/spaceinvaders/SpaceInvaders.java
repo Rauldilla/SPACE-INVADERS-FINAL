@@ -7,7 +7,7 @@ import android.view.Display;
 
 // SpaceInvadersActivity es el punto de entrada al juego.
 // Se va a encargar del ciclo de vida del juego al llamar alos métodos de vistaSpaceInvaders cuando sean solicitados por el SO.
-public class SpaceInvadersMainActivity extends Activity {
+public class SpaceInvaders extends Activity {
 
     //  visualización del juego
     // Tendrá la lógica del juego
@@ -24,8 +24,12 @@ public class SpaceInvadersMainActivity extends Activity {
         Point size = new Point();
         display.getSize(size);
 
+        // sgao 20180926 determinar si es un niño
+        Bundle extras = getIntent().getExtras();
+        final boolean isAdult = extras.getBoolean("adult");
+
         // Inicializar gameView y establecerlo como la visualización
-        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y);
+        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y, isAdult);
         setContentView(vistaSpaceInvaders);
 
     }

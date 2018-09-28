@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!--<Button-->
+    <!--android:id="@+id/baby"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:text="@string/i_m_adult"/>-->
+    <!--<Button-->
+    <!--android:id="@+id/adult"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:text="@string/i_m_baby"/>-->
+    <EditText
+            android:id="@+id/age"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_age"
+            android:inputType="numberSigned"/>
+    <Button
+            android:id="@+id/confirm"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/confirm"/>
+</LinearLayout>
