@@ -427,6 +427,20 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 }
 
             }
+            
+            // Ha impactado un marciano con la barrera
+
+            for (int i = 0; i < numMarcianitos; i++) {
+                if (marcianito[i].getVisibility()){
+                    for (int j = 0; j < numBloque; j++) {
+                        if (bloques[j].getVisibility()) {
+                            if (RectF.intersects(marcianito[i].getRect(), bloques[j].getRect())) {
+                                bloques[j].setInvisible();
+                            }
+                        }
+                    }
+                }
+            }
 
 
             // ¿Ha golpeado una bala del jugador a un ladrillo de guarida?
