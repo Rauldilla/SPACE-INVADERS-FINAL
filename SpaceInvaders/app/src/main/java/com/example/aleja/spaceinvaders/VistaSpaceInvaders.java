@@ -394,7 +394,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             if (puntuacion == numMarcianitos * 10) {
                                 pausado = true;
                                 puntuacion = 0;
-                                vidas = 3;
+                                vidas = 1;
                                 prepararNivel();
                             }
                         }
