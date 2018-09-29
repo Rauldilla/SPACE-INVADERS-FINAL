@@ -18,7 +18,7 @@ public class Laser {
     float velocidad =  350;
 
 
-    private int width = 1;
+    private int width = 5;
     private int height;
 
     private boolean isActive;
