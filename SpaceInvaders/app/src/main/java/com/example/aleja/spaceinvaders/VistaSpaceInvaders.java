@@ -468,7 +468,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         // ¿Se acabó el juego?
                         if (vidas == 0) {
                             pausado = true;
-                            vidas = 3;
+                            vidas = 1;
                             puntuacion = 0;
                             prepararNivel();
 
