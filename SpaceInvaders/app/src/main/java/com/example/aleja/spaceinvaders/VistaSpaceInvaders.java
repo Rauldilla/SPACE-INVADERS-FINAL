@@ -523,7 +523,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 if (motionEvent.getY() < ejeY - ejeY / 8) {
                     // Disparos lanzados
                     if (laser.shoot(nave.getX() +
-                            nave.getLength() / 20, ejeY, laser.ARRIBA)) {
+                            nave.getLength() / 2, ejeY - nave.getHeight(), laser.ARRIBA)) {
                         // soundPool.play(shootID, 1, 1, 0, 0, 1);
                     }
                 }
