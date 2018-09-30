@@ -394,7 +394,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             if (puntuacion == numMarcianitos * 10) {
                                 pausado = true;
                                 puntuacion = 0;
-                                vidas = 3;
+                                vidas = 1;
                                 prepararNivel();
                             }
                         }
@@ -427,6 +427,20 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 }
 
             }
+            
+            // Ha impactado un marciano con la barrera
+
+            for (int i = 0; i < numMarcianitos; i++) {
+                if (marcianito[i].getVisibility()){
+                    for (int j = 0; j < numBloque; j++) {
+                        if (bloques[j].getVisibility()) {
+                            if (RectF.intersects(marcianito[i].getRect(), bloques[j].getRect())) {
+                                bloques[j].setInvisible();
+                            }
+                        }
+                    }
+                }
+            }
 
 
             // ¿Ha golpeado una bala del jugador a un ladrillo de guarida?
@@ -454,7 +468,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         // ¿Se acabó el juego?
                         if (vidas == 0) {
                             pausado = true;
-                            vidas = 3;
+                            vidas = 1;
                             puntuacion = 0;
                             prepararNivel();
 
@@ -509,7 +523,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 if (motionEvent.getY() < ejeY - ejeY / 8) {
                     // Disparos lanzados
                     if (laser.shoot(nave.getX() +
-                            nave.getLength() / 20, ejeY, laser.ARRIBA)) {
+                            nave.getLength() / 2, ejeY - nave.getHeight(), laser.ARRIBA)) {
                         // soundPool.play(shootID, 1, 1, 0, 0, 1);
                     }
                 }
