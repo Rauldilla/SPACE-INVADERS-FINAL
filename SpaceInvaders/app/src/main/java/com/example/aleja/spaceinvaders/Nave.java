@@ -77,6 +77,10 @@ public class Nave {
     public float getLength(){
         return length;
     }
+    
+    public float getHeight() {
+        return height;
+    }
 
     // Este método será usado para cambiar/establecer si la nave
 // espacial va a la izquierda, la derecha o no se mueve
