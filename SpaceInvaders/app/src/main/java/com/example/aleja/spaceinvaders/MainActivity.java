@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
                 String str = text.getText().toString();
                 Log.d("debug", str);
                 Intent intent = new Intent(MainActivity.this, SpaceInvaders.class);
-                intent.putExtra("adult", Integer.parseInt(str) >= 16);
+                intent.putExtra("adult", Integer.parseInt(str) >= 13);
                 startActivity(intent);
             }
         });
