@@ -166,7 +166,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         // Construye un ejercito de invaders
         numMarcianitos = 0;
         for (int column = 0; column < 6; column++) {
-            for (int row = 0; row < 5; row++) {
+            for (int row = 1; row < 5; row++) {
                 marcianito[numMarcianitos] = new Marcianito(context, row, column, ejeX, ejeY);
                 numMarcianitos++;
             }
