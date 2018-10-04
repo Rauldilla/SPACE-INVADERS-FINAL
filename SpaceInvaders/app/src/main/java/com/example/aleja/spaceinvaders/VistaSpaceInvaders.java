@@ -346,10 +346,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             marcianito[i].setInvisible();
 
                             laser.setInactive();
-                            puntuacion = puntuacion + 10;
+                            puntuacion = puntuacion + 100;
 
                             // Ha ganado el jugador
-                            if (puntuacion == numMarcianitos * 10) {
+                            if (puntuacion == numMarcianitos * 100) {
                                 pausado = true;
                                 puntuacion = 0;
                                 vidas = 1;
