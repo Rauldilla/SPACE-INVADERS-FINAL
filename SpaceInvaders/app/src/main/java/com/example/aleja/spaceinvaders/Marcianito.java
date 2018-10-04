@@ -104,6 +104,10 @@ public class Marcianito {
         return length;
     }
 
+    public float getHeight() {
+        return height;
+    }
+
     public void update(long fps){
         if(shipMoving == LEFT){
             x = x - shipSpeed / fps;

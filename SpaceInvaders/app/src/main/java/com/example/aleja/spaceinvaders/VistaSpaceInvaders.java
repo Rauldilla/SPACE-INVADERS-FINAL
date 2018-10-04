@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,6 +13,8 @@ import android.view.SurfaceView;
 
 public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     Context context;
+
+    private boolean tocaD, tocaI;
 
     // Esta es nuestra secuencia
     private Thread hiloJuego = null;
@@ -166,7 +167,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         // Construye un ejercito de invaders
         numMarcianitos = 0;
         for (int column = 0; column < 6; column++) {
-            for (int row = 0; row < 5; row++) {
+            for (int row = 1; row < 5; row++) {
                 marcianito[numMarcianitos] = new Marcianito(context, row, column, ejeX, ejeY);
                 numMarcianitos++;
             }
@@ -285,8 +286,29 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         // ¿Ha perdido el jugador?
         boolean pierde = false;
 
+
+
         // Mueve la nave espacial del jugador
-        nave.update(fps);
+
+        tocaD = false;
+        tocaI = false;
+
+
+        if (nave.getX() > ejeX - nave.getLength()) {
+
+            tocaD = true;
+            tocaI = false;
+
+        }
+
+        if (nave.getX() < 0) {
+
+            tocaI = true;
+            tocaD = false;
+
+        }
+
+        nave.update(fps, tocaD, tocaI);
 
         // Actualiza a todos los invaders si están visibles
         for (int i = 0; i < numMarcianitos; i++) {
@@ -331,6 +353,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             }
 
         }
+
+
         if (this.isAdult) {
             // Actualiza a todas las balas de los invaders si están activas
 
@@ -506,12 +530,17 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
 
+
+
+
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
 
             // El jugador ha tocado la pantalla
             case MotionEvent.ACTION_DOWN:
 
                 pausado = false;
+
+
 
                 if (motionEvent.getY() > ejeY - ejeY / 10) {
                     if (motionEvent.getX() > ejeX / 2) {

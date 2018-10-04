@@ -91,20 +91,23 @@ public class Nave {
     // Este método de update será llamado desde el update en SpaceInvadersView
 // Determina si la nave espacial del jugador necesita moverse y cambiar las coordenadas
 // que están en x si es necesario
-    public void update(long fps){
-        if(shipMoving == LEFT){
-            x = x - velocidadNav / fps;
-        }
+    public void update(long fps, boolean tocaD,boolean tocaI){
 
-        if(shipMoving == RIGHT){
-            x = x + velocidadNav / fps;
-        }
 
-        // Actualiza rect el cual es usado para detectar impactos
-        rect.top = y;
-        rect.bottom = y + height;
-        rect.left = x;
-        rect.right = x + length;
+            if ((shipMoving == LEFT)&&(!tocaI)) {
+                x = x - velocidadNav / fps;
+            }
+
+            if ((shipMoving == RIGHT)&&(!tocaD)) {
+                x = x + velocidadNav / fps;
+            }
+
+            // Actualiza rect el cual es usado para detectar impactos
+            rect.top = y;
+            rect.bottom = y + height;
+            rect.left = x;
+            rect.right = x + length;
+
 
     }
 }
