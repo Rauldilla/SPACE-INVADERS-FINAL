@@ -1,5 +1,6 @@
 package com.example.aleja.spaceinvaders;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -467,11 +468,12 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                         // ¿Se acabó el juego?
                         if (vidas == 0) {
-                            pausado = true;
-                            vidas = 1;
-                            puntuacion = 0;
-                            prepararNivel();
-
+//                            pausado = true;
+//                            vidas = 1;
+//                            puntuacion = 0;
+//                            prepararNivel();
+                            Activity activity = (Activity) getContext();
+                            activity.finish();
                         }
                     }
                 }
