@@ -12,11 +12,9 @@ public class Laser {
     public final int ARRIBA = 0;
     public final int ABAJO = 1;
 
-
     // No vas a ningún lado
     int heading = -1;
     float velocidad =  350;
-
 
     private int width = 5;
     private int height;

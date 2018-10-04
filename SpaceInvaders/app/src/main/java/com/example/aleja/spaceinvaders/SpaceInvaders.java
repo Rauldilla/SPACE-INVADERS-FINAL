@@ -24,7 +24,7 @@ public class SpaceInvaders extends Activity {
         Point size = new Point();
         display.getSize(size);
 
-        // sgao 20180926 determinar si es un niño
+        // determinar si es un niño
         Bundle extras = getIntent().getExtras();
         final boolean isAdult = extras.getBoolean("adult");
 

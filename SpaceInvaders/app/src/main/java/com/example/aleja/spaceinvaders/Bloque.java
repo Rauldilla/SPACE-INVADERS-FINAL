@@ -43,7 +43,4 @@ public class Bloque {
     public boolean getVisibility(){
         return isVisible;
     }
-
-
-
 }

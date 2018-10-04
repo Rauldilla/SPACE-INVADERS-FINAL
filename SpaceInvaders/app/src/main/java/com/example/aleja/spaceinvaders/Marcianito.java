@@ -150,7 +150,6 @@ public class Marcianito {
             if(randomNumber == 0) {
                 return true;
             }
-
         }
 
         // Si está disparando aleatoriamente (sin estar cerca del jugador) una probabilidad de 1 en 5000

@@ -108,6 +108,5 @@ public class Nave {
             rect.left = x;
             rect.right = x + length;
 
-
     }
 }

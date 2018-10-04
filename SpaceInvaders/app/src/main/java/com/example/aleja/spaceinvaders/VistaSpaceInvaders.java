@@ -2,6 +2,8 @@ package com.example.aleja.spaceinvaders;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -62,15 +64,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     private Bloque[] bloques = new Bloque[400];
     private int numBloque;
 
-    /*// Para los efectos de sonido
-    private SoundPool soundPool;
-    private int playerExplodeID = -1;
-    private int invaderExplodeID = -1;
-    private int shootID = -1;
-    private int damageShelterID = -1;
-    private int uhID = -1;
-    private int ohID = -1;*/
-
     // La puntuación
     int puntuacion = 0;
 
@@ -80,18 +73,9 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     // flag que indica si habilita el disparo
     private boolean isAdult;
 
-    /*// ¿Que tan amenazador debe de ser el sonido?
-    private long menaceInterval = 1000;
-    // Cual amenazante sonido debe de seguir en reproducirse
-    private boolean uhOrOh;
-    // Cuando fué la última vez que reproducimos un amenazante sonido
-    private long lastMenaceTime = System.currentTimeMillis();*/
-
     // Cuando inicializamos (call new()) en gameView
-
     // Este método especial de constructor se ejecuta
     public VistaSpaceInvaders(Context context, int x, int y, boolean isAdult) {
-
         // La siguiente línea del código le pide a
         // la clase de SurfaceView que prepare nuestro objeto.
         // !Que amable¡.
@@ -108,42 +92,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
         ejeX = x;
         ejeY = y;
-
-
-        /*// Este SoundPool está obsoleto pero no te preocupes
-        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC,0);
-
-        try{
-            // Crea objetos de las 2 clases requeridas
-            AssetManager assetManager = context.getAssets();
-            AssetFileDescriptor descriptor;
-
-            // Carga nuestros efectos de sonido en la memoria listos para usarse
-            descriptor = assetManager.openFd("shoot.ogg");
-            shootID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("invaderexplode.ogg");
-            invaderExplodeID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("damageshelter.ogg");
-            damageShelterID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("playerexplode.ogg");
-            playerExplodeID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("damageshelter.ogg");
-            damageShelterID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("uh.ogg");
-            uhID = soundPool.load(descriptor, 0);
-
-            descriptor = assetManager.openFd("oh.ogg");
-            ohID = soundPool.load(descriptor, 0);
-
-        }catch(IOException e){
-            // Imprime un mensaje de error a la consola
-            Log.e("error", "failed to load sound files");
-        }*/
 
         prepararNivel();
     }
@@ -163,7 +111,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         for (int i = 0; i < marcianitoLaser.length; i++) {
             marcianitoLaser[i] = new Laser(ejeY);
         }
-
         // Construye un ejercito de invaders
         numMarcianitos = 0;
         for (int column = 0; column < 6; column++) {
@@ -183,9 +130,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 }
             }
         }
-
     }
-
     @Override
     public void run() {
         while (jugando) {
@@ -224,7 +169,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
             // Dibuja el color del fondo
             canvas.drawColor(Color.argb(255, 0, 0, 0)/*, PorterDuff.Mode.CLEAR*/);
-
             // Escoje el color de la brocha para dibujar
             paint.setColor(Color.argb(255, 255, 255, 255));
 
@@ -235,14 +179,9 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             // Dibuja a los invaders
             for (int i = 0; i < numMarcianitos; i++) {
                 if (marcianito[i].getVisibility()) {
-                    //if(uhOrOh) {
                     canvas.drawBitmap(marcianito[i].getBitmap(), marcianito[i].getX(), marcianito[i].getY(), paint);
-                    //}else{
-                    //canvas.drawBitmap(invaders[i].getBitmap2(), invaders[i].getX(), invaders[i].getY(), paint);
-                    //}
                 }
             }
-
 
             // Dibuja los ladrillos si están visibles
             for (int i = 0; i < numBloque; i++) {
@@ -285,8 +224,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
         // ¿Ha perdido el jugador?
         boolean pierde = false;
-
-
 
         // Mueve la nave espacial del jugador
 
@@ -354,27 +291,24 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
         }
 
+        // ¿Chocó algún invader en el extremo de la pantalla?
+
+        if (bumped) {
+
+            // Mueve a todos los invaders hacia abajo y cambia la dirección
+            for (int i = 0; i < numMarcianitos; i++) {
+                marcianito[i].dropDownAndReverse();
+                // Han aterrizado los invaders
+                if (marcianito[i].getY() > ejeY - ejeY / 10) {
+                    pierde = true;
+                }
+            }
+        }
 
         if (this.isAdult) {
             // Actualiza a todas las balas de los invaders si están activas
 
-            // ¿Chocó algún invader en el extremo de la pantalla?
 
-            if (bumped) {
-
-                // Mueve a todos los invaders hacia abajo y cambia la dirección
-                for (int i = 0; i < numMarcianitos; i++) {
-                    marcianito[i].dropDownAndReverse();
-                    // Han aterrizado los invaders
-                    if (marcianito[i].getY() > ejeY - ejeY / 10) {
-                        pierde = true;
-                    }
-                }
-
-                // Incrementa el nivel de amenaza
-                // al hacer los sonidos más frecuentes
-                //menaceInterval = menaceInterval - 80;
-            }
             // Actualiza la bala del jugador
 
             if (laser.getStatus()) {
@@ -474,7 +408,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 for (int i = 0; i < numBloque; i++) {
                     if (bloques[i].getVisibility()) {
                         if (RectF.intersects(laser.getRect(), bloques[i].getRect())) {
-                            // A collision has occurred
+                            // Se ha producido una colision
                             laser.setInactive();
                             bloques[i].setInvisible();
 
@@ -529,48 +463,31 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     // Así es que podemos anular este método y detectar toques a la pantalla.
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-
-
-
-
         switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
-
             // El jugador ha tocado la pantalla
             case MotionEvent.ACTION_DOWN:
-
                 pausado = false;
-
-
-
                 if (motionEvent.getY() > ejeY - ejeY / 10) {
                     if (motionEvent.getX() > ejeX / 2) {
                         nave.setMovementState(nave.RIGHT);
                     } else {
                         nave.setMovementState(nave.LEFT);
                     }
-
                 }
-
                 if (motionEvent.getY() < ejeY - ejeY / 8) {
                     // Disparos lanzados
                     if (laser.shoot(nave.getX() +
                             nave.getLength() / 2, ejeY - nave.getHeight(), laser.ARRIBA)) {
-                        // soundPool.play(shootID, 1, 1, 0, 0, 1);
                     }
                 }
                 break;
-
             // El jugador ha retirado su dedo de la pantalla
             case MotionEvent.ACTION_UP:
-
                 if (motionEvent.getY() > ejeY - ejeY / 10) {
                     nave.setMovementState(nave.PARADA);
                 }
-
                 break;
-
         }
-
         return true;
     }
 }

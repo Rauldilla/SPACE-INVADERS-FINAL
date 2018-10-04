@@ -5,16 +5,6 @@
     android:background="@drawable/titulo">
     >
 
-    <!--<Button-->
-    <!--android:id="@+id/baby"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:text="@string/i_m_adult"/>-->
-    <!--<Button-->
-    <!--android:id="@+id/adult"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:text="@string/i_m_baby"/>-->
     <EditText
         android:id="@+id/age"
         android:layout_width="250sp"
