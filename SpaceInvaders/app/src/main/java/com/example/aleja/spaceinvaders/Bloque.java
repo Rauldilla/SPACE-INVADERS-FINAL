@@ -20,7 +20,7 @@ public class Bloque {
 
         // El número de guaridas
         int shelterPadding = screenX / 9;
-        int startHeight = screenY - (screenY /8 * 2);
+        int startHeight = (int)(screenY - (screenY /8 * 2.2));
 
         rect = new RectF(column * width + brickPadding +
                 (shelterPadding * shelterNumber) +
