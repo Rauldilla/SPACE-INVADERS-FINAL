@@ -308,6 +308,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             }
         }
 
+        if (pierde) {
+            prepararNivel();
+        }
+
         if (this.isAdult) {
 
             // Actualiza la bala del jugador
@@ -320,10 +324,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 if (marcianitoLaser[i].getStatus()) {
                     marcianitoLaser[i].update(fps);
                 }
-            }
-
-            if (pierde) {
-                prepararNivel();
             }
 
             // Ha tocado la parte alta de la pantalla la bala del jugador
