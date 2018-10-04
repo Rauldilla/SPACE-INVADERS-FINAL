@@ -33,8 +33,8 @@ public class Nave {
     private int shipMoving = PARADA;
 
     // Este es el método del constructor
-// Cuando creamos un objeto de esta clase daremos
-// la anchura y la altura de la pantalla
+    // Cuando creamos un objeto de esta clase daremos
+    // la anchura y la altura de la pantalla
     public Nave(Context context, int screenX, int screenY){
 
         // Inicializa un RectF vacío
@@ -50,7 +50,7 @@ public class Nave {
         // Inicializa el bitmap
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
 
-        // ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
+        // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
         bitmap = Bitmap.createScaledBitmap(bitmap,
                 (int) (length),
                 (int) (height),
@@ -65,7 +65,7 @@ public class Nave {
     }
 
     // Este es un método de "get" para hacer el rectángulo que
-// define nuestra nave espacial disponible en la clase de SpaceInvadersView
+    // define nuestra nave espacial disponible en la clase de SpaceInvadersView
     public Bitmap getBitmap(){
         return bitmap;
     }
@@ -83,14 +83,14 @@ public class Nave {
     }
 
     // Este método será usado para cambiar/establecer si la nave
-// espacial va a la izquierda, la derecha o no se mueve
+    // espacial va a la izquierda, la derecha o no se mueve
     public void setMovementState(int state){
         shipMoving = state;
     }
 
     // Este método de update será llamado desde el update en SpaceInvadersView
-// Determina si la nave espacial del jugador necesita moverse y cambiar las coordenadas
-// que están en x si es necesario
+    // Determina si la nave espacial del jugador necesita moverse y cambiar las coordenadas
+    // que están en x si es necesario
     public void update(long fps, boolean tocaD,boolean tocaI){
 
 

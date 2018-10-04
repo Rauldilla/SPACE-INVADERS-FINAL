@@ -14,8 +14,6 @@ public class Bloque {
 
         isVisible = true;
 
-        // A veces una bala atraviesa este relleno
-        // Establece el relleno a 0 si te causa molestias
         int brickPadding = 1;
 
         // El número de guaridas

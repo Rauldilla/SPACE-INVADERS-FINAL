@@ -14,7 +14,6 @@ public class Marcianito {
 
     // La nave espacial del jugador va a ser representada por un Bitmap
     private Bitmap bitmap1;
-    private Bitmap bitmap2;
 
     // Qué tan largo y ancho será nuestro Invader
     private float length;
@@ -54,16 +53,9 @@ public class Marcianito {
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
-        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano2);
 
         // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap1 = Bitmap.createScaledBitmap(bitmap1,
-                (int) (length),
-                (int) (height),
-                false);
-
-        // Ajusta el segundo bitmap a un tamaño apropiado para la resolución de la pantalla
-        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
                 (int) (height),
                 false);
@@ -86,10 +78,6 @@ public class Marcianito {
 
     public Bitmap getBitmap(){
         return bitmap1;
-    }
-
-    public Bitmap getBitmap2(){
-        return bitmap2;
     }
 
     public float getX(){

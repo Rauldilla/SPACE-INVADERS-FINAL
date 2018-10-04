@@ -96,11 +96,9 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         prepararNivel();
     }
 
+    // Aquí vamos a inicializar todos los objetos del juego
     private void prepararNivel() {
 
-        // Aquí vamos a inicializar todos los objetos del juego
-
-        // Hacer una nueva nave espacial del jugador
         // Haz una nave espacial para un jugador nuevo
         nave = new Nave(context, ejeX, ejeY);
 
@@ -111,6 +109,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         for (int i = 0; i < marcianitoLaser.length; i++) {
             marcianitoLaser[i] = new Laser(ejeY);
         }
+
         // Construye un ejercito de invaders
         numMarcianitos = 0;
         for (int column = 0; column < 6; column++) {
@@ -154,15 +153,13 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 fps = 1000 / timeThisFrame;
             }
 
-            // Vamos a hacer algo nuevo aquí hacia el final de proyecto
-
         }
 
 
     }
 
     private void dibujar() {
-        // Asegurate de que la superficie del dibujo sea valida o tronamos
+
         if (ourHolder.getSurface().isValid()) {
             // Bloquea el lienzo para que este listo para dibujar
             canvas = ourHolder.lockCanvas();
@@ -175,7 +172,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             // Dibuja a la nave espacial del jugador
             canvas.drawBitmap(nave.getBitmap(), nave.getX(), ejeY - 100, paint);
 
-            // Dibuja a los invaders
             // Dibuja a los invaders
             for (int i = 0; i < numMarcianitos; i++) {
                 if (marcianito[i].getVisibility()) {
@@ -195,9 +191,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 canvas.drawRect(laser.getRect(), paint);
             }
 
-            // Dibuja las balas de los invaders
-
-            // Actualiza todas las balas de los invaders si están activas
+            // Dibuja todas las balas de los invaders si están activas
             for (int i = 0; i < marcianitoLaser.length; i++) {
                 if (marcianitoLaser[i].getStatus()) {
                     canvas.drawRect(marcianitoLaser[i].getRect(), paint);
@@ -230,19 +224,14 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         tocaD = false;
         tocaI = false;
 
-
         if (nave.getX() > ejeX - nave.getLength()) {
-
             tocaD = true;
             tocaI = false;
-
         }
 
         if (nave.getX() < 0) {
-
             tocaI = true;
             tocaD = false;
-
         }
 
         nave.update(fps, tocaD, tocaI);
@@ -320,15 +309,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         }
 
         if (this.isAdult) {
-            // Actualiza a todas las balas de los invaders si están activas
-
 
             // Actualiza la bala del jugador
-
             if (laser.getStatus()) {
                 laser.update(fps);
             }
-
 
             // Actualiza todas las balas de los invaders si están activas
             for (int i = 0; i < marcianitoLaser.length; i++) {
@@ -375,17 +360,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 }
             }
 
-            // Actualiza las balas del jugador
-
-            // ¿Han golpeado las balas del jugador la parte superior de la pantalla?
-
-            // ¿Ha golpeado alguna bala de un invader la parte inferior de la pantalla?
-
-            // ¿Ha golpeado la bala del jugador a un invader?
-
-
             // Ha impactado una bala alienígena a un ladrillo de la guarida
-
             for (int i = 0; i < marcianitoLaser.length; i++) {
                 if (marcianitoLaser[i].getStatus()) {
                     for (int j = 0; j < numBloque; j++) {
@@ -401,8 +376,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
             }
 
-
-            // ¿Ha golpeado una bala del jugador a un ladrillo de guarida?
             // Ha impactado una bala del jugador a un ladrillo de la guarida
             if (laser.getStatus()) {
                 for (int i = 0; i < numBloque; i++) {
@@ -424,12 +397,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         marcianitoLaser[i].setInactive();
                         vidas--;
 
-                        // ¿Se acabó el juego?
+                        // Se acabó el juego
                         if (vidas == 0) {
-//                            pausado = true;
-//                            vidas = 1;
-//                            puntuacion = 0;
-//                            prepararNivel();
                             Activity activity = (Activity) getContext();
                             activity.finish();
                         }
