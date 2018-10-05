@@ -45,7 +45,7 @@ public class Nave {
 
         // Inicia la nave en el centro de la pantalla aproximadamente
         x = screenX / 2;
-        y = screenY - 20;
+        y = screenY - 100;
 
         // Inicializa el bitmap
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
@@ -72,6 +72,10 @@ public class Nave {
 
     public float getX(){
         return x;
+    }
+
+    public float getY() {
+        return y;
     }
 
     public float getLength(){

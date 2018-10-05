@@ -170,7 +170,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             paint.setColor(Color.argb(255, 255, 255, 255));
 
             // Dibuja a la nave espacial del jugador
-            canvas.drawBitmap(nave.getBitmap(), nave.getX(), ejeY - 100, paint);
+            canvas.drawBitmap(nave.getBitmap(), nave.getX(), nave.getY(), paint);
 
             // Dibuja a los invaders
             for (int i = 0; i < numMarcianitos; i++) {
@@ -295,7 +295,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         }
 
         // Ha impactado un marciano con la barrera
-
         for (int i = 0; i < numMarcianitos; i++) {
             if (marcianito[i].getVisibility()){
                 for (int j = 0; j < numBloque; j++) {
@@ -308,8 +307,19 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             }
         }
 
+        // Ha impactado un invader con la nave
+        for (int i = 0; i < numMarcianitos; i++) {
+            if (marcianito[i].getVisibility()) {
+                if (RectF.intersects(marcianito[i].getRect(), nave.getRect())) {
+                    Activity activity = (Activity) getContext();
+                    activity.finish();
+                }
+            }
+        }
+
         if (pierde) {
-            prepararNivel();
+            Activity activity = (Activity) getContext();
+            activity.finish();
         }
 
         if (this.isAdult) {
@@ -353,7 +363,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                 pausado = true;
                                 puntuacion = 0;
                                 vidas = 1;
-                                prepararNivel();
+                                Activity activity = (Activity) getContext();
+                                activity.finish();
                             }
                         }
                     }
@@ -405,6 +416,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                     }
                 }
             }
+
         }
     }
 
