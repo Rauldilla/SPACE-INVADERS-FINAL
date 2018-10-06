@@ -359,11 +359,14 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                             // Ha ganado el jugador
                             if (puntuacion == numMarcianitos * 100) {
-                                pausado = true;
-                                puntuacion = 0;
-                                vidas = 1;
-                                Activity activity = (Activity) getContext();
+                                final Activity activity = (Activity) getContext();
+                                Intent intent = new Intent(activity, MenuActivity.class);
+
+                                intent.putExtra(getResources().getString(R.string.victory), true);
+                                intent.putExtra(getResources().getString(R.string.score), puntuacion);
                                 activity.finish();
+                                activity.startActivity(intent);
+                                Thread.currentThread().interrupt();
                             }
                         }
                     }
