@@ -40,7 +40,7 @@ public class Nave {
         // Inicializa un RectF vacío
         rect = new RectF();
 
-        length = screenX/10;
+        length = screenX/13;
         height = screenY/10;
 
         // Inicia la nave en el centro de la pantalla aproximadamente
