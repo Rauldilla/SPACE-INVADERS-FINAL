@@ -4,36 +4,37 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/score" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="55dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="45dp" />
+
     <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:id="@+id/imagen"/>
+        android:id="@+id/imagen"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop" />
 
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
-
-        <TextView android:id="@+id/ending"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/score" />
-
-        <TextView android:id="@+id/score"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-
-        <Button android:id="@+id/back"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="@string/back"/>
-    </LinearLayout>
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp"
+        android:text="@string/back" />
 
 </RelativeLayout>
