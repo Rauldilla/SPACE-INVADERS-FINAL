@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -27,5 +28,6 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
     }
 }

@@ -310,15 +310,20 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         for (int i = 0; i < numMarcianitos; i++) {
             if (marcianito[i].getVisibility()) {
                 if (RectF.intersects(marcianito[i].getRect(), nave.getRect())) {
-                    Activity activity = (Activity) getContext();
-                    activity.finish();
+                    pierde = true;
                 }
             }
         }
 
         if (pierde) {
-            Activity activity = (Activity) getContext();
+            final Activity activity = (Activity) getContext();
+            Intent intent = new Intent(activity, MenuActivity.class);
+
+            intent.putExtra(getResources().getString(R.string.victory), false);
+            intent.putExtra(getResources().getString(R.string.score), puntuacion);
             activity.finish();
+            activity.startActivity(intent);
+            Thread.currentThread().interrupt();
         }
 
         if (this.isAdult) {

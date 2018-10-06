@@ -9,7 +9,7 @@ import android.view.Display;
 // Se va a encargar del ciclo de vida del juego al llamar alos métodos de vistaSpaceInvaders cuando sean solicitados por el SO.
 public class SpaceInvaders extends Activity {
 
-    //  visualización del juego
+    // Visualización del juego
     // Tendrá la lógica del juego
     // y responderá a los toques a la pantalla
     VistaSpaceInvaders vistaSpaceInvaders;
