@@ -2,8 +2,7 @@ package com.example.aleja.spaceinvaders;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -410,8 +409,14 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                         // Se acabó el juego
                         if (vidas == 0) {
-                            Activity activity = (Activity) getContext();
+                            final Activity activity = (Activity) getContext();
+                            Intent intent = new Intent(activity, MenuActivity.class);
+
+                            intent.putExtra(getResources().getString(R.string.victory), false);
+                            intent.putExtra(getResources().getString(R.string.score), puntuacion);
                             activity.finish();
+                            activity.startActivity(intent);
+                            Thread.currentThread().interrupt();
                         }
                     }
                 }

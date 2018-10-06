@@ -2,4 +2,8 @@
     <string name="app_name">SpaceInvaders</string>
     <string name="enter_age">Introduzca la edad</string>
     <string name="confirm">Confirmo</string>
+    <string name="back">Volver</string>
+    <string name="victory">Victoria</string>
+    <string name="fail">Game Over</string>
+    <string name="score">Puntos</string>
 </resources>
