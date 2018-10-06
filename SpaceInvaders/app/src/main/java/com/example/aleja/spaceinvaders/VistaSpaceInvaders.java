@@ -282,13 +282,14 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         // ¿Chocó algún invader en el extremo de la pantalla?
 
         if (bumped) {
-
             // Mueve a todos los invaders hacia abajo y cambia la dirección
             for (int i = 0; i < numMarcianitos; i++) {
                 marcianito[i].dropDownAndReverse();
                 // Han aterrizado los invaders
-                if (marcianito[i].getY() > ejeY - ejeY / 10) {
-                    pierde = true;
+                if (marcianito[i].getVisibility()) {
+                    if (marcianito[i].getY() > ejeY - ejeY / 10) {
+                        pierde = true;
+                    }
                 }
             }
         }
