@@ -2,6 +2,7 @@ package com.example.aleja.spaceinvaders;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,6 +27,11 @@ public class MenuActivity extends Activity {
         final TextView scoreLabel = this.findViewById(R.id.score);
         final int score = extras.getInt(getResources().getString(R.string.score));
         scoreLabel.setText(String.valueOf(score));
+
+        final String name = extras.getString(getResources().getString(R.string.name));
+        final TextView nameLabel = this.findViewById(R.id.name);
+        nameLabel.setText(name);
+        Log.d("debug", name);
 
         final Button back = this.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
