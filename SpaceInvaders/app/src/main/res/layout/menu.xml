@@ -38,6 +38,11 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
 
+    <ListView
+            android:id="@+id/ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     <Button
         android:id="@+id/back"
         android:layout_width="wrap_content"

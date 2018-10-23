@@ -7,10 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -71,20 +72,34 @@ public class MenuActivity extends Activity {
                 null,
                 null,
                 null,
-                ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE + " DESC"
+                ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE + " DESC",
+                "10"
         );
 
-        List<Pair<String, Integer>> items = new ArrayList<>();
+        List<Entry> items = new ArrayList<>();
         int nameIndex = cursor.getColumnIndex(ScoreDdHelper.ScoreEntry.COLUMN_NAME_NAME);
         int scoreIndex = cursor.getColumnIndex(ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE);
         while (cursor.moveToNext()) {
-            items.add(new Pair<String, Integer>(cursor.getString(nameIndex), cursor.getInt(scoreIndex)));
+            items.add(new Entry(cursor.getString(nameIndex), cursor.getInt(scoreIndex)));
         }
         cursor.close();
 
-        // test
-        for (Pair<String, Integer> item : items) {
-            Log.d("debug", item.toString());
+        final ListView listView = this.findViewById(R.id.ranking);
+        listView.setAdapter(new ArrayAdapter<>(this, R.layout.ranking, items));
+    }
+
+    private static class Entry {
+        private String name;
+        private Integer score;
+
+        private Entry(String name, Integer score) {
+            this.name = name;
+            this.score = score;
+        }
+
+        @Override
+        public String toString() {
+            return "User:'" + name + '\t' + "Score:" + score;
         }
     }
 }
