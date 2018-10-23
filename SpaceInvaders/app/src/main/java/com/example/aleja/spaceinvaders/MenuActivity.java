@@ -1,17 +1,28 @@
 package com.example.aleja.spaceinvaders;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuActivity extends Activity {
+    private ScoreDdHelper helper;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        helper = new ScoreDdHelper(this);
+
         setContentView(R.layout.menu);
 
         final ImageView imagenFinal = this.findViewById(R.id.imagen);
@@ -39,5 +50,41 @@ public class MenuActivity extends Activity {
                 MenuActivity.this.finish();
             }
         });
+
+        SQLiteDatabase db = this.helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ScoreDdHelper.ScoreEntry.COLUMN_NAME_NAME, name);
+        values.put(ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE, score);
+        long newRowId = db.insert(ScoreDdHelper.ScoreEntry.TABLE_NAME, null, values);
+
+        db = this.helper.getReadableDatabase();
+        String[] projection = {
+                BaseColumns._ID,
+                ScoreDdHelper.ScoreEntry.COLUMN_NAME_NAME,
+                ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE
+        };
+
+        Cursor cursor = db.query(
+                ScoreDdHelper.ScoreEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE + " DESC"
+        );
+
+        List<Pair<String, Integer>> items = new ArrayList<>();
+        int nameIndex = cursor.getColumnIndex(ScoreDdHelper.ScoreEntry.COLUMN_NAME_NAME);
+        int scoreIndex = cursor.getColumnIndex(ScoreDdHelper.ScoreEntry.COLUMN_NAME_SCORE);
+        while (cursor.moveToNext()) {
+            items.add(new Pair<String, Integer>(cursor.getString(nameIndex), cursor.getInt(scoreIndex)));
+        }
+        cursor.close();
+
+        // test
+        for (Pair<String, Integer> item : items) {
+            Log.d("debug", item.toString());
+        }
     }
 }
