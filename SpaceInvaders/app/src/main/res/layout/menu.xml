@@ -5,12 +5,22 @@
                 android:orientation="vertical">
 
     <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:text="@string/name" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="45dp"
         android:text="@string/score" />
 
     <TextView
@@ -18,7 +28,7 @@
         android:layout_width="55dp"
         android:layout_height="31dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="65dp" />
 
     <ImageView
         android:id="@+id/imagen"
@@ -27,6 +37,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
+
+    <ListView
+            android:id="@+id/ranking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/back"

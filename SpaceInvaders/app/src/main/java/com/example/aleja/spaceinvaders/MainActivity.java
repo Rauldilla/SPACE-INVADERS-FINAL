@@ -14,17 +14,23 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.select_age);
+        setContentView(R.layout.intro);
 
-        final EditText text = (EditText) this.findViewById(R.id.age);
+        final EditText nameText = this.findViewById(R.id.name);
 
-        final Button confirm = (Button) this.findViewById(R.id.confirm);
+        final EditText ageText = this.findViewById(R.id.age);
+
+        final Button confirm = this.findViewById(R.id.confirm);
+
         confirm.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String str = text.getText().toString();
-                Log.d("debug", str);
+                String age = ageText.getText().toString();
+                String name = nameText.getText().toString();
+                Log.d("debug", age);
+                Log.d("debug", name);
                 Intent intent = new Intent(MainActivity.this, SpaceInvaders.class);
-                intent.putExtra("adult", Integer.parseInt(str) > 13);
+                intent.putExtra("adult", Integer.parseInt(age) > 13);
+                intent.putExtra(getResources().getString(R.string.name), name);
                 startActivity(intent);
             }
         });

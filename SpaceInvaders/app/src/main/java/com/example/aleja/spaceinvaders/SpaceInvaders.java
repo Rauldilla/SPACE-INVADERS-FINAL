@@ -27,9 +27,10 @@ public class SpaceInvaders extends Activity {
         // determinar si es un niño
         Bundle extras = getIntent().getExtras();
         final boolean isAdult = extras.getBoolean("adult");
+        final String name = extras.getString(getResources().getString(R.string.name));
 
         // Inicializar gameView y establecerlo como la visualización
-        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y, isAdult);
+        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y, isAdult, name);
         setContentView(vistaSpaceInvaders);
 
     }

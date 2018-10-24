@@ -79,15 +79,20 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     // flag que indica si habilita el disparo
     private boolean isAdult;
 
+    // nombre de jugador
+    private String name;
+
+
     // Cuando inicializamos (call new()) en gameView
     // Este método especial de constructor se ejecuta
-    public VistaSpaceInvaders(Context context, int x, int y, boolean isAdult) {
+    public VistaSpaceInvaders(Context context, int x, int y, boolean isAdult, String name) {
         // La siguiente línea del código le pide a
         // la clase de SurfaceView que prepare nuestro objeto.
         // !Que amable¡.
         super(context);
 
         this.isAdult = isAdult;
+        this.name = name;
 
         // Hace una copia del "context" disponible globalmete para que la usemos en otro método
         this.context = context;
@@ -362,6 +367,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
             intent.putExtra(getResources().getString(R.string.victory), false);
             intent.putExtra(getResources().getString(R.string.score), puntuacion);
+            intent.putExtra(getResources().getString(R.string.name), this.name);
             activity.finish();
             activity.startActivity(intent);
             Thread.currentThread().interrupt();
@@ -407,6 +413,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             if (puntuacion == numMarcianitos * 100) {
                                 final Activity activity = (Activity) getContext();
                                 Intent intent = new Intent(activity, MenuActivity.class);
+                                intent.putExtra(getResources().getString(R.string.name), this.name);
 
                                 intent.putExtra(getResources().getString(R.string.victory), true);
                                 intent.putExtra(getResources().getString(R.string.score), puntuacion);
@@ -460,6 +467,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         if (vidas == 0) {
                             final Activity activity = (Activity) getContext();
                             Intent intent = new Intent(activity, MenuActivity.class);
+                            intent.putExtra(getResources().getString(R.string.name), this.name);
 
                             intent.putExtra(getResources().getString(R.string.victory), false);
                             intent.putExtra(getResources().getString(R.string.score), puntuacion);
