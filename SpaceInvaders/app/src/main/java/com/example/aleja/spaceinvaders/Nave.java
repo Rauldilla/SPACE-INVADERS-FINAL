@@ -28,6 +28,8 @@ public class Nave {
     public final int PARADA = 0;
     public final int LEFT = 1;
     public final int RIGHT = 2;
+    public final int UP = 3;
+    public final int DOWN = 4;
 
     // Se esta moviendo la nave espacial y en que dirección
     private int shipMoving = PARADA;
@@ -45,7 +47,7 @@ public class Nave {
 
         // Inicia la nave en el centro de la pantalla aproximadamente
         x = screenX / 2;
-        y = screenY - 100;
+        y = screenY - height - 10;
 
         // Inicializa el bitmap
         bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
@@ -95,7 +97,7 @@ public class Nave {
     // Este método de update será llamado desde el update en SpaceInvadersView
     // Determina si la nave espacial del jugador necesita moverse y cambiar las coordenadas
     // que están en x si es necesario
-    public void update(long fps, boolean tocaD,boolean tocaI){
+    public void update(long fps, boolean tocaD, boolean tocaI, boolean tocaAR,boolean tocaAB){
 
 
             if ((shipMoving == LEFT)&&(!tocaI)) {
@@ -104,6 +106,14 @@ public class Nave {
 
             if ((shipMoving == RIGHT)&&(!tocaD)) {
                 x = x + velocidadNav / fps;
+            }
+
+            if ((shipMoving == UP)&&(!tocaAR)) {
+                y = y - velocidadNav / fps;
+            }
+
+            if ((shipMoving == DOWN)&&(!tocaAB)) {
+                y = y + velocidadNav / fps;
             }
 
             // Actualiza rect el cual es usado para detectar impactos
