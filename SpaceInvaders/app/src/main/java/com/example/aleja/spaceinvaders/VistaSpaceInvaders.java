@@ -389,13 +389,34 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
             // Ha tocado la parte alta de la pantalla la bala del jugador
             if (laser.getImpactPointY() < 0) {
-                laser.setInactive();
+                laser.changeDir();
+            } else if (laser.getImpactPointY() > ejeY) {
+                laser.changeDir();
             }
 
             // Ha tocado la parte baja de la pantalla la bala del invader
             for (int i = 0; i < marcianitoLaser.length; i++) {
                 if (marcianitoLaser[i].getImpactPointY() > ejeY) {
-                    marcianitoLaser[i].setInactive();
+                    marcianitoLaser[i].changeDir();
+                    if (!(marcianitoLaser[i].isLetal())) {
+                        marcianitoLaser[i].hacerLetal();
+                    }
+                } else if (marcianitoLaser[i].getImpactPointY() < 0) {
+                    marcianitoLaser[i].changeDir();
+                }
+            }
+
+            // Si la bala ha tocado suelo es hacerLetal para el invader
+            for (int i = 0; i < marcianitoLaser.length; i++) {
+                if ((marcianitoLaser[i].isLetal()) && (marcianitoLaser[i].getStatus())) {
+                    for (int j = 0; j < numMarcianitos; j++) {
+                        if (marcianito[i].getVisibility()) {
+                            if (RectF.intersects(marcianitoLaser[i].getRect(), marcianito[j].getRect())) {
+                                marcianitoLaser[i].setInactive();
+                                marcianito[j].setInvisible();
+                            }
+                        }
+                    }
                 }
             }
 

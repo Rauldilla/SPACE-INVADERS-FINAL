@@ -21,6 +21,9 @@ public class Laser {
 
     private boolean isActive;
 
+    // Ha tocado ya un borde ?
+    private boolean letal;
+
     public Laser(int screenY) {
 
         height = screenY / 20;
@@ -52,6 +55,7 @@ public class Laser {
         if (!isActive) {
             x = startX;
             y = startY;
+            letal = false;   // Solo sirve para los laser de invaders
             heading = direction;
             isActive = true;
             return true;
@@ -59,6 +63,18 @@ public class Laser {
 
         // La bala ya está activa
         return false;
+    }
+
+    public void hacerLetal(){
+        letal = true;
+    }
+
+    public void changeDir(){
+        if(this.heading == ABAJO){
+            this.heading = ARRIBA;
+        } else{
+            this.heading = ABAJO;
+        }
     }
 
     public void update(long fps){
@@ -76,5 +92,9 @@ public class Laser {
         rect.top = y;
         rect.bottom = y + height;
 
+    }
+
+    public boolean isLetal() {
+        return letal;
     }
 }
