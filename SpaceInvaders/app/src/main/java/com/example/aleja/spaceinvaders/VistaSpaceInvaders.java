@@ -410,7 +410,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             for (int i = 0; i < marcianitoLaser.length; i++) {
                 if ((marcianitoLaser[i].isLetal()) && (marcianitoLaser[i].getStatus())) {
                     for (int j = 0; j < numMarcianitos; j++) {
-                        if (marcianito[i].getVisibility()) {
+                        if (marcianito[j].getVisibility()) {
                             if (RectF.intersects(marcianitoLaser[i].getRect(), marcianito[j].getRect())) {
                                 marcianitoLaser[i].setInactive();
                                 marcianito[j].setInvisible();
