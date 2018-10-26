@@ -79,13 +79,16 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     // flag que indica si habilita el disparo
     private boolean isAdult;
 
+    // flag que indica si habilita el rebote
+    private boolean rebotes;
+
     // nombre de jugador
     private String name;
 
 
     // Cuando inicializamos (call new()) en gameView
     // Este método especial de constructor se ejecuta
-    public VistaSpaceInvaders(Context context, int x, int y, boolean isAdult, String name) {
+    public VistaSpaceInvaders(Context context, int x, int y, boolean isAdult, String name, boolean rebotes) {
         // La siguiente línea del código le pide a
         // la clase de SurfaceView que prepare nuestro objeto.
         // !Que amable¡.
@@ -93,6 +96,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
         this.isAdult = isAdult;
         this.name = name;
+        this.rebotes = rebotes;
 
         // Hace una copia del "context" disponible globalmete para que la usemos en otro método
         this.context = context;
@@ -387,35 +391,49 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 }
             }
 
-            // Ha tocado la parte alta de la pantalla la bala del jugador
-            if (laser.getImpactPointY() < 0) {
-                laser.changeDir();
-            } else if (laser.getImpactPointY() > ejeY) {
-                laser.changeDir();
-            }
-
-            // Ha tocado la parte baja de la pantalla la bala del invader
-            for (int i = 0; i < marcianitoLaser.length; i++) {
-                if (marcianitoLaser[i].getImpactPointY() > ejeY) {
-                    marcianitoLaser[i].changeDir();
-                    if (!(marcianitoLaser[i].isLetal())) {
-                        marcianitoLaser[i].hacerLetal();
-                    }
-                } else if (marcianitoLaser[i].getImpactPointY() < 0) {
-                    marcianitoLaser[i].changeDir();
+            if (this.rebotes) {
+                // Ha tocado la parte alta de la pantalla la bala del jugador
+                if (laser.getImpactPointY() < 0) {
+                    laser.changeDir();
+                } else if (laser.getImpactPointY() > ejeY) {
+                    laser.changeDir();
                 }
-            }
 
-            // Si la bala ha tocado suelo es hacerLetal para el invader
-            for (int i = 0; i < marcianitoLaser.length; i++) {
-                if ((marcianitoLaser[i].isLetal()) && (marcianitoLaser[i].getStatus())) {
-                    for (int j = 0; j < numMarcianitos; j++) {
-                        if (marcianito[j].getVisibility()) {
-                            if (RectF.intersects(marcianitoLaser[i].getRect(), marcianito[j].getRect())) {
-                                marcianitoLaser[i].setInactive();
-                                marcianito[j].setInvisible();
+                // Ha tocado la parte baja de la pantalla la bala del invader
+                for (int i = 0; i < marcianitoLaser.length; i++) {
+                    if (marcianitoLaser[i].getImpactPointY() > ejeY) {
+                        marcianitoLaser[i].changeDir();
+                        if (!(marcianitoLaser[i].isLetal())) {
+                            marcianitoLaser[i].hacerLetal();
+                        }
+                    } else if (marcianitoLaser[i].getImpactPointY() < 0) {
+                        marcianitoLaser[i].changeDir();
+                    }
+                }
+
+                // Si la bala ha tocado suelo es letal para el invader
+                for (int i = 0; i < marcianitoLaser.length; i++) {
+                    if ((marcianitoLaser[i].isLetal()) && (marcianitoLaser[i].getStatus())) {
+                        for (int j = 0; j < numMarcianitos; j++) {
+                            if (marcianito[j].getVisibility()) {
+                                if (RectF.intersects(marcianitoLaser[i].getRect(), marcianito[j].getRect())) {
+                                    marcianitoLaser[i].setInactive();
+                                    marcianito[j].setInvisible();
+                                }
                             }
                         }
+                    }
+                }
+            } else {
+                // Ha tocado la parte alta de la pantalla la bala del jugador
+                if (laser.getImpactPointY() < 0) {
+                    laser.setInactive();
+                }
+
+                // Ha tocado la parte baja de la pantalla la bala del invader
+                for (int i = 0; i < marcianitoLaser.length; i++) {
+                    if (marcianitoLaser[i].getImpactPointY() > ejeY) {
+                        marcianitoLaser[i].setInactive();
                     }
                 }
             }
