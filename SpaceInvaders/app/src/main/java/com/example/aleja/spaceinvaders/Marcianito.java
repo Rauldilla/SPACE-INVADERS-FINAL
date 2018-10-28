@@ -36,6 +36,8 @@ public class Marcianito {
 
     boolean isVisible;
 
+    int padding;
+
     public Marcianito(Context context, int row, int column, int screenX, int screenY) {
 
         // Inicializa un RectF vacío
@@ -46,7 +48,7 @@ public class Marcianito {
 
         isVisible = true;
 
-        int padding = screenX / 25;
+        padding = screenX / 25;
 
         x = column * (length + padding);
         y = row * (length + padding/4);
@@ -61,7 +63,35 @@ public class Marcianito {
                 false);
 
         // Qué tan rápido va el invader en pixeles por segundo
-        shipSpeed = 40;
+        shipSpeed = screenX/20;
+    }
+
+    public Marcianito(Context context, int screenX, int screenY) {
+
+        // Inicializa un RectF vacío
+        rect = new RectF();
+
+        length = screenX / 15;
+        height = screenY / 20;
+
+        isVisible = false;
+
+        padding = screenX / 25;
+
+        x = 0 * (length + padding);
+        y = 1 * (length + padding/4);
+
+        // Inicializa el bitmap
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
+
+        // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        // Qué tan rápido va el invader en pixeles por segundo
+        shipSpeed = screenX/11;
     }
 
     public void setInvisible(){
@@ -96,6 +126,12 @@ public class Marcianito {
         return height;
     }
 
+    public void reinicio(){
+        this.x = 0 * (this.length + this.padding);
+        this.y = 1 * (this.length + this.padding/4);
+        this.isVisible = true;
+    }
+
     public void update(long fps){
         if(shipMoving == LEFT){
             x = x - shipSpeed / fps;
@@ -122,7 +158,7 @@ public class Marcianito {
 
         y = y + height;
 
-        shipSpeed = shipSpeed * 1.18f;
+        shipSpeed = shipSpeed * 1.10f;
     }
 
     public boolean takeAim(float playerShipX, float playerShipLength){
@@ -133,16 +169,28 @@ public class Marcianito {
         if((playerShipX + playerShipLength > x &&
                 playerShipX + playerShipLength < x + length) || (playerShipX > x && playerShipX < x + length)) {
 
-            // Una probabilidad de 1 en 500 chance para disparar
+            // Una probabilidad de 1 en 150 chance para disparar
             randomNumber = generator.nextInt(150);
             if(randomNumber == 0) {
                 return true;
             }
         }
 
-        // Si está disparando aleatoriamente (sin estar cerca del jugador) una probabilidad de 1 en 5000
+        // Si está disparando aleatoriamente (sin estar cerca del jugador) una probabilidad de 1 en 2000
         randomNumber = generator.nextInt(2000);
         if(randomNumber == 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean takeAimEsp(float playerShipX, float playerShipLength){
+
+        int randomNumber;
+
+        randomNumber = generator.nextInt(50);
+        if(randomNumber == 0) {
             return true;
         }
 
