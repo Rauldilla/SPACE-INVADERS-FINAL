@@ -564,6 +564,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             if (RectF.intersects(marcianitoLaser[i].getRect(), bloques[j].getRect())) {
                                 marcianitoLaser[i].setInactive();
                                 bloques[j].setInvisible();
+                                for (int v = 0; v < numMarcianitos; v++) {
+                                    marcianito[v].changeBitmap();
+                                }
+                                nave.changeBitmap();
+                                marcianitoEsp.changeBitmap();
                             }
                         }
                     }
@@ -578,6 +583,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         if (RectF.intersects(espLaser.getRect(), bloques[j].getRect())) {
                             espLaser.setInactive();
                             bloques[j].setInvisible();
+                            for (int v = 0; v < numMarcianitos; v++) {
+                                marcianito[v].changeBitmap();
+                            }
+                            nave.changeBitmap();
+                            marcianitoEsp.changeBitmap();
                         }
                     }
                 }
@@ -591,7 +601,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             // Se ha producido una colision
                             laser.setInactive();
                             bloques[i].setInvisible();
-
+                            for (int v = 0; v < numMarcianitos; v++) {
+                                marcianito[v].changeBitmap();
+                            }
+                            nave.changeBitmap();
+                            marcianitoEsp.changeBitmap();
                         }
                     }
                 }

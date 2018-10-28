@@ -12,8 +12,15 @@ public class Marcianito {
 
     Random generator = new Random();
 
-    // La nave espacial del jugador va a ser representada por un Bitmap
+    //los invader van a ser representados por un Bitmap
     private Bitmap bitmap1;
+    private Bitmap bitmap2;
+
+    // Selector de bitmap
+    private final int PRIMERO = 1;
+    private final int SEGUNDO = 2;
+
+    private int select = PRIMERO;
 
     // Qué tan largo y ancho será nuestro Invader
     private float length;
@@ -55,9 +62,15 @@ public class Marcianito {
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano2);
 
         // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
                 (int) (height),
                 false);
@@ -83,9 +96,15 @@ public class Marcianito {
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor2);
 
         // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
                 (int) (height),
                 false);
@@ -106,8 +125,20 @@ public class Marcianito {
         return rect;
     }
 
+    public void changeBitmap(){
+        if (select == PRIMERO){
+            select = SEGUNDO;
+        } else {
+            select = PRIMERO;
+        }
+    }
+
     public Bitmap getBitmap(){
-        return bitmap1;
+        if (select == PRIMERO) {
+            return bitmap1;
+        } else {
+            return bitmap2;
+        }
     }
 
     public float getX(){

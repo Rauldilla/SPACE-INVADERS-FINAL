@@ -24,6 +24,16 @@ public class Nave {
     // Esto va a mantener la rapidez de los pixeles por segundo a la que la nave espacial se moverá
     private float velocidadNav;
 
+    // La nave espacial del jugador va a ser representada por un Bitmap
+    private Bitmap bitmap1;
+    private Bitmap bitmap2;
+
+    // Selector de bitmap
+    private final int PRIMERO = 1;
+    private final int SEGUNDO = 2;
+
+    private int select = PRIMERO;
+
     // En qué direcciones se puede mover la nave espacial
     public final int PARADA = 0;
     public final int LEFT = 1;
@@ -50,10 +60,16 @@ public class Nave {
         y = screenY - height - 10;
 
         // Inicializa el bitmap
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
 
         // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
-        bitmap = Bitmap.createScaledBitmap(bitmap,
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
                 (int) (height),
                 false);
@@ -66,10 +82,20 @@ public class Nave {
         return rect;
     }
 
-    // Este es un método de "get" para hacer el rectángulo que
-    // define nuestra nave espacial disponible en la clase de SpaceInvadersView
+    public void changeBitmap(){
+        if (select == PRIMERO){
+            select = SEGUNDO;
+        } else {
+            select = PRIMERO;
+        }
+    }
+
     public Bitmap getBitmap(){
-        return bitmap;
+        if (select == PRIMERO) {
+            return bitmap1;
+        } else {
+            return bitmap2;
+        }
     }
 
     public float getX(){
