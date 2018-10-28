@@ -43,7 +43,7 @@ public class Marcianito {
         // Inicializa un RectF vacío
         rect = new RectF();
 
-        length = screenX / 20;
+        length = screenX / 21;
         height = screenY / 20;
 
         isVisible = true;
@@ -51,7 +51,7 @@ public class Marcianito {
         padding = screenX / 25;
 
         x = column * (length + padding);
-        y = row * (length + padding/4);
+        y = row * (height + padding/2);
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
@@ -78,8 +78,8 @@ public class Marcianito {
 
         padding = screenX / 25;
 
-        x = 0 * (length + padding);
-        y = 1 * (length + padding/4);
+        x = 0;
+        y = height + padding/5;
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
@@ -127,8 +127,8 @@ public class Marcianito {
     }
 
     public void reinicio(){
-        this.x = 0 * (this.length + this.padding);
-        this.y = 1 * (this.length + this.padding/4);
+        x = 0;
+        y = height + padding/5;
         this.isVisible = true;
     }
 
