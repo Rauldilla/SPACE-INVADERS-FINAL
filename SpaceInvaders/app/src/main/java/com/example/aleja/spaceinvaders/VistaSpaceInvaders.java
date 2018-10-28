@@ -12,9 +12,13 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.Random;
+
 
 public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     Context context;
+
+    Random generator = new Random();
     
     private boolean tocaD, tocaI, tocaAR, tocaAB;
 
@@ -476,6 +480,19 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                 if (RectF.intersects(marcianitoLaser[i].getRect(), marcianito[j].getRect())) {
                                     marcianitoLaser[i].setInactive();
                                     marcianito[j].setInvisible();
+                                    puntuacion = puntuacion + 100;
+                                    // Ha ganado el jugador
+                                    if (puntuacion == numMarcianitos * 100) {
+                                        final Activity activity = (Activity) getContext();
+                                        Intent intent = new Intent(activity, MenuActivity.class);
+                                        intent.putExtra(getResources().getString(R.string.name), this.name);
+
+                                        intent.putExtra(getResources().getString(R.string.victory), true);
+                                        intent.putExtra(getResources().getString(R.string.score), puntuacion);
+                                        activity.finish();
+                                        activity.startActivity(intent);
+                                        Thread.currentThread().interrupt();
+                                    }
                                 }
                                 if (RectF.intersects(marcianitoLaser[i].getRect(), marcianitoEsp.getRect())) {
                                     marcianitoLaser[i].setInactive();
@@ -492,6 +509,19 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             if (RectF.intersects(espLaser.getRect(), marcianito[i].getRect())) {
                                 espLaser.setInactive();
                                 marcianito[i].setInvisible();
+                                puntuacion = puntuacion + 100;
+                                // Ha ganado el jugador
+                                if (puntuacion == numMarcianitos * 100) {
+                                    final Activity activity = (Activity) getContext();
+                                    Intent intent = new Intent(activity, MenuActivity.class);
+                                    intent.putExtra(getResources().getString(R.string.name), this.name);
+
+                                    intent.putExtra(getResources().getString(R.string.victory), true);
+                                    intent.putExtra(getResources().getString(R.string.score), puntuacion);
+                                    activity.finish();
+                                    activity.startActivity(intent);
+                                    Thread.currentThread().interrupt();
+                                }
                             }
                             if (RectF.intersects(espLaser.getRect(), marcianitoEsp.getRect())) {
                                 espLaser.setInactive();
@@ -606,6 +636,111 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             }
                             nave.changeBitmap();
                             marcianitoEsp.changeBitmap();
+                        }
+                    }
+                }
+            }
+
+            // Dos o mas lasers impactan a la vez en la barrera
+            for (int i = 0; i < marcianitoLaser.length; i++) {
+                for (int j = 0; j < marcianitoLaser.length; j++) {
+                    if ((marcianitoLaser[i].getStatus()) && (marcianitoLaser[j].getStatus())) {
+                        for (int k = 0; k < numBloque; k++) {
+                            for (int v = 0; v < numBloque; v++) {
+                                if ((bloques[k].getVisibility()) && (bloques[v].getVisibility())) {
+                                    if ((RectF.intersects(marcianitoLaser[i].getRect(), bloques[k].getRect()))
+                                            && (RectF.intersects(marcianitoLaser[j].getRect(), bloques[v].getRect()))) {
+                                        marcianitoLaser[i].setInactive();
+                                        marcianitoLaser[j].setInactive();
+                                        bloques[k].setInvisible();
+                                        bloques[v].setInvisible();
+                                        for (int m = 0; m < numMarcianitos; m++) {
+                                            int randomNumber = generator.nextInt(2);
+                                            if(randomNumber == 1) {
+                                                marcianito[m].changeBitmap();
+                                            }
+                                        }
+                                        nave.changeBitmap();
+                                        marcianitoEsp.changeBitmap();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int j = 0; j < marcianitoLaser.length; j++) {
+                if ((espLaser.getStatus()) && (marcianitoLaser[j].getStatus())) {
+                    for (int k = 0; k < numBloque; k++) {
+                        for (int v = 0; v < numBloque; v++) {
+                            if ((bloques[k].getVisibility()) && (bloques[v].getVisibility())) {
+                                if ((RectF.intersects(espLaser.getRect(), bloques[k].getRect()))
+                                        && (RectF.intersects(marcianitoLaser[j].getRect(), bloques[v].getRect()))) {
+                                    espLaser.setInactive();
+                                    marcianitoLaser[j].setInactive();
+                                    bloques[k].setInvisible();
+                                    bloques[v].setInvisible();
+                                    for (int m = 0; m < numMarcianitos; m++) {
+                                        int randomNumber = generator.nextInt(2);
+                                        if(randomNumber == 1) {
+                                            marcianito[m].changeBitmap();
+                                        }
+                                    }
+                                    nave.changeBitmap();
+                                    marcianitoEsp.changeBitmap();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            for (int j = 0; j < marcianitoLaser.length; j++) {
+                if ((laser.getStatus()) && (marcianitoLaser[j].getStatus())) {
+                    for (int k = 0; k < numBloque; k++) {
+                        for (int v = 0; v < numBloque; v++) {
+                            if ((bloques[k].getVisibility()) && (bloques[v].getVisibility())) {
+                                if ((RectF.intersects(laser.getRect(), bloques[k].getRect()))
+                                        && (RectF.intersects(marcianitoLaser[j].getRect(), bloques[v].getRect()))) {
+                                    laser.setInactive();
+                                    marcianitoLaser[j].setInactive();
+                                    bloques[k].setInvisible();
+                                    bloques[v].setInvisible();
+                                    for (int m = 0; m < numMarcianitos; m++) {
+                                        int randomNumber = generator.nextInt(2);
+                                        if(randomNumber == 1) {
+                                            marcianito[m].changeBitmap();
+                                        }
+                                    }
+                                    nave.changeBitmap();
+                                    marcianitoEsp.changeBitmap();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if ((laser.getStatus()) && (espLaser.getStatus())) {
+                for (int k = 0; k < numBloque; k++) {
+                    for (int v = 0; v < numBloque; v++) {
+                        if ((bloques[k].getVisibility()) && (bloques[v].getVisibility())) {
+                            if ((RectF.intersects(laser.getRect(), bloques[k].getRect()))
+                                    && (RectF.intersects(espLaser.getRect(), bloques[v].getRect()))) {
+                                laser.setInactive();
+                                espLaser.setInactive();
+                                bloques[k].setInvisible();
+                                bloques[v].setInvisible();
+                                for (int m = 0; m < numMarcianitos; m++) {
+                                    int randomNumber = generator.nextInt(2);
+                                    if(randomNumber == 1) {
+                                        marcianito[m].changeBitmap();
+                                    }
+                                }
+                                nave.changeBitmap();
+                                marcianitoEsp.changeBitmap();
+                            }
                         }
                     }
                 }
