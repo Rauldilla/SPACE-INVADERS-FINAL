@@ -19,14 +19,14 @@ public class BotonM {
     public BotonM(Context context, int screenX, int screenY, float pX, float pY){
         rect = new RectF();
 
-        length = screenX/20;
-        height = screenY/20;
+        length = screenX/30;
+        height = screenY/25;
 
         x = screenX - pX;
         y = screenY - pY;
 
         // Inicializa el bitmap
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.boton);
 
         // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
         bitmap = Bitmap.createScaledBitmap(bitmap,

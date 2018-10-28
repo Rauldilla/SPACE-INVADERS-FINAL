@@ -82,7 +82,7 @@ public class Marcianito {
         y = 1 * (length + padding/4);
 
         // Inicializa el bitmap
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
 
         // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap1 = Bitmap.createScaledBitmap(bitmap1,

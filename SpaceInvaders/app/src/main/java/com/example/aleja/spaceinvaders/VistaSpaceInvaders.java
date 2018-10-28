@@ -131,10 +131,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
         espLaser = new Laser(ejeY);
 
         // Prepara botones de disparo
-        BArriba = new BotonM(context, ejeX, ejeY, 1750, 150);
-        BAbajo = new BotonM(context, ejeX, ejeY, 1750, 50);
-        BDerecha = new BotonM(context, ejeX, ejeY, 1700, 100);
-        BIzquierda = new BotonM(context, ejeX, ejeY, 1800, 100);
+        BArriba = new BotonM(context, ejeX, ejeY, 1700, 150);
+        BAbajo = new BotonM(context, ejeX, ejeY, 1700, 50);
+        BDerecha = new BotonM(context, ejeX, ejeY, 1650, 100);
+        BIzquierda = new BotonM(context, ejeX, ejeY, 1750, 100);
 
         // Inicializa la formación de invadersBullets
         for (int i = 0; i < marcianitoLaser.length; i++) {
@@ -397,6 +397,13 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 if (RectF.intersects(marcianito[i].getRect(), nave.getRect())) {
                     pierde = true;
                 }
+            }
+        }
+
+        // Ha impactado el invader espontaneo con la nave
+        if (marcianitoEsp.getVisibility()) {
+            if (RectF.intersects(marcianitoEsp.getRect(), nave.getRect())) {
+                pierde = true;
             }
         }
 

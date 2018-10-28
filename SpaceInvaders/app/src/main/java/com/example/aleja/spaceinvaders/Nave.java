@@ -50,7 +50,7 @@ public class Nave {
         y = screenY - height - 10;
 
         // Inicializa el bitmap
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
+        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
 
         // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
         bitmap = Bitmap.createScaledBitmap(bitmap,
