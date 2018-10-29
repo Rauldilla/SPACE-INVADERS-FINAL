@@ -8,4 +8,5 @@
     <string name="fail">Game Over</string>
     <string name="score">Puntos</string>
     <string name="name">Name</string>
+    <string name="see_ranking">Ver el ranking</string>
 </resources>
