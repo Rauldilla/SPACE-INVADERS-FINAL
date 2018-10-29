@@ -28,9 +28,10 @@ public class SpaceInvaders extends Activity {
         Bundle extras = getIntent().getExtras();
         final boolean isAdult = extras.getBoolean("adult");
         final String name = extras.getString(getResources().getString(R.string.name));
+        final boolean rebote = extras.getBoolean("rebote");
 
         // Inicializar gameView y establecerlo como la visualización
-        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y, isAdult, name);
+        vistaSpaceInvaders = new VistaSpaceInvaders(this, size.x, size.y, isAdult, name, rebote);
         setContentView(vistaSpaceInvaders);
 
     }

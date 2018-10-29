@@ -12,8 +12,15 @@ public class Marcianito {
 
     Random generator = new Random();
 
-    // La nave espacial del jugador va a ser representada por un Bitmap
+    //los invader van a ser representados por un Bitmap
     private Bitmap bitmap1;
+    private Bitmap bitmap2;
+
+    // Selector de bitmap
+    private final int PRIMERO = 1;
+    private final int SEGUNDO = 2;
+
+    private int select = PRIMERO;
 
     // Qué tan largo y ancho será nuestro Invader
     private float length;
@@ -36,23 +43,26 @@ public class Marcianito {
 
     boolean isVisible;
 
+    int padding;
+
     public Marcianito(Context context, int row, int column, int screenX, int screenY) {
 
         // Inicializa un RectF vacío
         rect = new RectF();
 
-        length = screenX / 20;
+        length = screenX / 21;
         height = screenY / 20;
 
         isVisible = true;
 
-        int padding = screenX / 25;
+        padding = screenX / 25;
 
         x = column * (length + padding);
-        y = row * (length + padding/4);
+        y = row * (height + padding/2);
 
         // Inicializa el bitmap
         bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano2);
 
         // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
         bitmap1 = Bitmap.createScaledBitmap(bitmap1,
@@ -60,8 +70,47 @@ public class Marcianito {
                 (int) (height),
                 false);
 
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                (int) (length),
+                (int) (height),
+                false);
+
         // Qué tan rápido va el invader en pixeles por segundo
-        shipSpeed = 40;
+        shipSpeed = screenX/20;
+    }
+
+    public Marcianito(Context context, int screenX, int screenY) {
+
+        // Inicializa un RectF vacío
+        rect = new RectF();
+
+        length = screenX / 15;
+        height = screenY / 20;
+
+        isVisible = false;
+
+        padding = screenX / 25;
+
+        x = 0;
+        y = height + padding/5;
+
+        // Inicializa el bitmap
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor2);
+
+        // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                (int) (length),
+                (int) (height),
+                false);
+
+        // Qué tan rápido va el invader en pixeles por segundo
+        shipSpeed = screenX/11;
     }
 
     public void setInvisible(){
@@ -76,8 +125,20 @@ public class Marcianito {
         return rect;
     }
 
+    public void changeBitmap(){
+        if (select == PRIMERO){
+            select = SEGUNDO;
+        } else {
+            select = PRIMERO;
+        }
+    }
+
     public Bitmap getBitmap(){
-        return bitmap1;
+        if (select == PRIMERO) {
+            return bitmap1;
+        } else {
+            return bitmap2;
+        }
     }
 
     public float getX(){
@@ -94,6 +155,12 @@ public class Marcianito {
 
     public float getHeight() {
         return height;
+    }
+
+    public void reinicio(){
+        x = 0;
+        y = height + padding/5;
+        this.isVisible = true;
     }
 
     public void update(long fps){
@@ -122,7 +189,7 @@ public class Marcianito {
 
         y = y + height;
 
-        shipSpeed = shipSpeed * 1.18f;
+        shipSpeed = shipSpeed * 1.10f;
     }
 
     public boolean takeAim(float playerShipX, float playerShipLength){
@@ -133,16 +200,28 @@ public class Marcianito {
         if((playerShipX + playerShipLength > x &&
                 playerShipX + playerShipLength < x + length) || (playerShipX > x && playerShipX < x + length)) {
 
-            // Una probabilidad de 1 en 500 chance para disparar
+            // Una probabilidad de 1 en 150 chance para disparar
             randomNumber = generator.nextInt(150);
             if(randomNumber == 0) {
                 return true;
             }
         }
 
-        // Si está disparando aleatoriamente (sin estar cerca del jugador) una probabilidad de 1 en 5000
+        // Si está disparando aleatoriamente (sin estar cerca del jugador) una probabilidad de 1 en 2000
         randomNumber = generator.nextInt(2000);
         if(randomNumber == 0){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean takeAimEsp(float playerShipX, float playerShipLength){
+
+        int randomNumber;
+
+        randomNumber = generator.nextInt(50);
+        if(randomNumber == 0) {
             return true;
         }
 

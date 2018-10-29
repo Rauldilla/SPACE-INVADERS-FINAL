@@ -24,10 +24,22 @@ public class Nave {
     // Esto va a mantener la rapidez de los pixeles por segundo a la que la nave espacial se moverá
     private float velocidadNav;
 
+    // La nave espacial del jugador va a ser representada por un Bitmap
+    private Bitmap bitmap1;
+    private Bitmap bitmap2;
+
+    // Selector de bitmap
+    private final int PRIMERO = 1;
+    private final int SEGUNDO = 2;
+
+    private int select = PRIMERO;
+
     // En qué direcciones se puede mover la nave espacial
     public final int PARADA = 0;
     public final int LEFT = 1;
     public final int RIGHT = 2;
+    public final int UP = 3;
+    public final int DOWN = 4;
 
     // Se esta moviendo la nave espacial y en que dirección
     private int shipMoving = PARADA;
@@ -40,18 +52,24 @@ public class Nave {
         // Inicializa un RectF vacío
         rect = new RectF();
 
-        length = screenX/13;
+        length = screenX/17;
         height = screenY/10;
 
         // Inicia la nave en el centro de la pantalla aproximadamente
         x = screenX / 2;
-        y = screenY - 100;
+        y = screenY - height - 10;
 
         // Inicializa el bitmap
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
 
         // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
-        bitmap = Bitmap.createScaledBitmap(bitmap,
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
                 (int) (length),
                 (int) (height),
                 false);
@@ -64,10 +82,20 @@ public class Nave {
         return rect;
     }
 
-    // Este es un método de "get" para hacer el rectángulo que
-    // define nuestra nave espacial disponible en la clase de SpaceInvadersView
+    public void changeBitmap(){
+        if (select == PRIMERO){
+            select = SEGUNDO;
+        } else {
+            select = PRIMERO;
+        }
+    }
+
     public Bitmap getBitmap(){
-        return bitmap;
+        if (select == PRIMERO) {
+            return bitmap1;
+        } else {
+            return bitmap2;
+        }
     }
 
     public float getX(){
@@ -95,7 +123,7 @@ public class Nave {
     // Este método de update será llamado desde el update en SpaceInvadersView
     // Determina si la nave espacial del jugador necesita moverse y cambiar las coordenadas
     // que están en x si es necesario
-    public void update(long fps, boolean tocaD,boolean tocaI){
+    public void update(long fps, boolean tocaD, boolean tocaI, boolean tocaAR,boolean tocaAB){
 
 
             if ((shipMoving == LEFT)&&(!tocaI)) {
@@ -104,6 +132,14 @@ public class Nave {
 
             if ((shipMoving == RIGHT)&&(!tocaD)) {
                 x = x + velocidadNav / fps;
+            }
+
+            if ((shipMoving == UP)&&(!tocaAR)) {
+                y = y - velocidadNav / fps;
+            }
+
+            if ((shipMoving == DOWN)&&(!tocaAB)) {
+                y = y + velocidadNav / fps;
             }
 
             // Actualiza rect el cual es usado para detectar impactos
