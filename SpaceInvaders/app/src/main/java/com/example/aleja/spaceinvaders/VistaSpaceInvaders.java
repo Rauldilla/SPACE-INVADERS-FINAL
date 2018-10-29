@@ -213,10 +213,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             canvas.drawBitmap(nave.getBitmap(), nave.getX(), nave.getY(), paint);
 
             // Dibuja Botones disparo
-            canvas.drawBitmap(BArriba.getBitmap(), BArriba.getX(), BArriba.getY(), paint);
-            canvas.drawBitmap(BAbajo.getBitmap(), BAbajo.getX(), BAbajo.getY(), paint);
-            canvas.drawBitmap(BDerecha.getBitmap(), BDerecha.getX(), BDerecha.getY(), paint);
-            canvas.drawBitmap(BIzquierda.getBitmap(), BIzquierda.getX(), BIzquierda.getY(), paint);
+            canvas.drawBitmap(BArriba.getBitmap1(), BArriba.getX(), BArriba.getY(), paint);
+            canvas.drawBitmap(BAbajo.getBitmap2(), BAbajo.getX(), BAbajo.getY(), paint);
+            canvas.drawBitmap(BDerecha.getBitmap3(), BDerecha.getX(), BDerecha.getY(), paint);
+            canvas.drawBitmap(BIzquierda.getBitmap4(), BIzquierda.getX(), BIzquierda.getY(), paint);
 
             // Dibuja invader espontaneo
             if (marcianitoEsp.getVisibility()){
@@ -793,16 +793,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             // El jugador ha tocado la pantalla
             case MotionEvent.ACTION_DOWN:
                 pausado = false;
-                /*if (motionEvent.getY() > ejeY - ejeY / 10) {
-                    if (motionEvent.getX() > ejeX / 2) {
-                        nave.setMovementState(nave.RIGHT);
-                    } else {
-                        nave.setMovementState(nave.LEFT);
-                    }
-                }*/
+
                 if ((motionEvent.getY() < ejeY) && (motionEvent.getX() > ejeX / 2)) {
                     // Disparos lanzados
-                    if (laser.shoot(nave.getX() + nave.getLength() / 2, ejeY - nave.getHeight(), laser.ARRIBA)) {
+                    if (laser.shoot(nave.getX() + nave.getLength() / 2, nave.getY(), laser.ARRIBA)) {
                     }
 
                 }

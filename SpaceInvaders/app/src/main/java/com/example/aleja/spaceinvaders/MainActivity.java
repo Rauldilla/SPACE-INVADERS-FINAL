@@ -18,11 +18,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.intro);
 
         final EditText nameText = this.findViewById(R.id.name);
-
         final EditText ageText = this.findViewById(R.id.age);
-
         final Button confirm = this.findViewById(R.id.confirm);
-
         final Switch switchReb = this.findViewById(R.id.switch1);
 
         confirm.setOnClickListener(new View.OnClickListener() {

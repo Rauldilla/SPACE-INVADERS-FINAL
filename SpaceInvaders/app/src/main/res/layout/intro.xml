@@ -7,11 +7,10 @@
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="144dp"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="166dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/age"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="160dp"
         android:text="Rebote"
         android:textOff="OFF"
         android:textOn="ON"
@@ -43,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="75dp"
         android:text="@string/confirm" />
 
 

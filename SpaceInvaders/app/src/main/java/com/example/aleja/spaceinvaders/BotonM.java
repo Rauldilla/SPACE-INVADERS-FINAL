@@ -8,7 +8,11 @@ import android.graphics.RectF;
 public class BotonM {
     RectF rect;
 
-    private Bitmap bitmap;
+    private Bitmap bitmap1;
+    private Bitmap bitmap2;
+    private Bitmap bitmap3;
+    private Bitmap bitmap4;
+
 
     private float length;
     private float height;
@@ -26,10 +30,26 @@ public class BotonM {
         y = screenY - pY;
 
         // Inicializa el bitmap
-        bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.boton);
+        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.botonarriba);
+        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.botonabajo);
+        bitmap3 = BitmapFactory.decodeResource(context.getResources(), R.drawable.botonderecha);
+        bitmap4 = BitmapFactory.decodeResource(context.getResources(), R.drawable.botonizquierda);
 
         // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
-        bitmap = Bitmap.createScaledBitmap(bitmap,
+        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                (int) (length),
+                (int) (height),
+                false);
+
+        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                (int) (length),
+                (int) (height),
+                false);
+        bitmap3 = Bitmap.createScaledBitmap(bitmap3,
+                (int) (length),
+                (int) (height),
+                false);
+        bitmap4 = Bitmap.createScaledBitmap(bitmap4,
                 (int) (length),
                 (int) (height),
                 false);
@@ -43,12 +63,17 @@ public class BotonM {
         this.rect = rect;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public Bitmap getBitmap1() {
+        return bitmap1;
     }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public Bitmap getBitmap2() {
+        return bitmap2;
+    }
+    public Bitmap getBitmap3() {
+        return bitmap3;
+    }
+    public Bitmap getBitmap4() {
+        return bitmap4;
     }
 
     public float getLength() {

@@ -51,6 +51,7 @@ public class Laser {
         }
 
     }
+
     public boolean shoot(float startX, float startY, int direction) {
         if (!isActive) {
             x = startX;

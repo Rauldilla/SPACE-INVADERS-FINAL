@@ -22,7 +22,7 @@ public class ScoreDdHelper extends SQLiteOpenHelper {
 
         @Override
         public String toString() {
-            return "User:'" + name + '\t' + "Score:" + score;
+            return "Nombre:  " + name + '\t' + "   Puntos:  " + score;
         }
     }
 
