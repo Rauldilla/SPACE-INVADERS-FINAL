@@ -25,8 +25,8 @@ public class Nave {
     private float velocidadNav;
 
     // La nave espacial del jugador va a ser representada por un Bitmap
-    private Bitmap bitmap1;
-    private Bitmap bitmap2;
+    private static Bitmap bitmap1 = null;
+    private static Bitmap bitmap2 = null;
 
     // Selector de bitmap
     private final int PRIMERO = 1;
@@ -59,20 +59,24 @@ public class Nave {
         x = screenX / 2;
         y = screenY - height - 10;
 
+        // arreglo de problema de memoria
         // Inicializa el bitmap
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
-        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
-
-        // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
-        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
-                (int) (length),
-                (int) (height),
-                false);
-
-        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
-                (int) (length),
-                (int) (height),
-                false);
+        if (bitmap1 == null) {
+            // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
+            bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave1);
+            bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
+        if (bitmap2 == null) {
+            // Ajusta el bitmap a un tamaño proporcionado a la resolución de la pantalla
+            bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.nave2);
+            bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
 
         // Qué tan rápido va la nave espacial en pixeles por segundo
         velocidadNav = 350;
