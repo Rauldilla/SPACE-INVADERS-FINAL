@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class MenuActivity extends Activity {
     private ScoreDdHelper helper;
+    boolean rebo;
+    boolean isAdult;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,17 @@ public class MenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuActivity.this, RankingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button redo = this.findViewById(R.id.redo);
+        redo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this,SpaceInvaders.class);
+                intent.putExtra("adult", isAdult);
+                intent.putExtra(getResources().getString(R.string.name), name);
+                intent.putExtra("rebote", rebo);
                 startActivity(intent);
             }
         });
