@@ -22,6 +22,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     
     private boolean tocaD, tocaI, tocaAR, tocaAB;
 
+    private boolean predict1, predict2, predict3;
+
     // Esta es nuestra secuencia
     private Thread hiloJuego = null;
 
@@ -57,6 +59,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
     // La nave del jugador
     private Nave nave;
+    // Nave de ayuda
+    private Nave esparrin;
 
     // Laser
     private Laser laser;
@@ -127,6 +131,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
         // Haz una nave espacial para un jugador nuevo
         nave = new Nave(context, ejeX, ejeY);
+        // Inicializa el esparril
+        esparrin = new Nave(context, ejeX, ejeY);
 
         // Prepara la bala del jugador
         laser = new Laser(ejeY);
@@ -370,6 +376,46 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         pierde = true;
                     }
                 }
+            }
+        }
+
+        // Desaparicion y aparicion aleatoria de nave
+        int randomN = generator.nextInt(200);
+        if (randomN == 1){
+            predict1 = false;
+            predict2 = false;
+            predict3 = false;
+            int newX = generator.nextInt(ejeX);
+            int newY = generator.nextInt(ejeY);
+            esparrin.setX(newX);
+            esparrin.setY(newY);
+            esparrin.update(fps);
+
+            for (int i = 0; i < numMarcianitos; i++) {
+                if (marcianito[i].getVisibility()) {
+                    if ((RectF.intersects(marcianito[i].getRect(), esparrin.getRect()))) {
+                        predict1 = true;
+                    }
+                }
+            }
+
+            for (int j = 0; j < numBloque; j++) {
+                if (bloques[j].getVisibility()) {
+                    if ((RectF.intersects(esparrin.getRect(), bloques[j].getRect()))) {
+                        predict2 = true;
+                    }
+                }
+            }
+
+            if (marcianitoEsp.getVisibility()) {
+                if (RectF.intersects(marcianitoEsp.getRect(), esparrin.getRect())) {
+                    predict3 = true;
+                }
+            }
+
+            if (!((predict1)||(predict2)||(predict3))){
+                nave.setX(newX);
+                nave.setY(newY);
             }
         }
 
