@@ -489,8 +489,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                                         intent.putExtra(getResources().getString(R.string.victory), true);
                                         intent.putExtra(getResources().getString(R.string.score), puntuacion);
+<<<<<<< HEAD
                                         intent.putExtra("adult", this.isAdult);
                                         intent.putExtra("rebote", this.rebotes);
+=======
+>>>>>>> parent of 8278539... Añadido boton reinicio
                                         activity.finish();
                                         activity.startActivity(intent);
                                         Thread.currentThread().interrupt();
@@ -520,8 +523,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                                     intent.putExtra(getResources().getString(R.string.victory), true);
                                     intent.putExtra(getResources().getString(R.string.score), puntuacion);
+<<<<<<< HEAD
                                     intent.putExtra("adult", this.isAdult);
                                     intent.putExtra("rebote", this.rebotes);
+=======
+>>>>>>> parent of 8278539... Añadido boton reinicio
                                     activity.finish();
                                     activity.startActivity(intent);
                                     Thread.currentThread().interrupt();
@@ -571,8 +577,11 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                                 intent.putExtra(getResources().getString(R.string.victory), true);
                                 intent.putExtra(getResources().getString(R.string.score), puntuacion);
+<<<<<<< HEAD
                                 intent.putExtra("adult", this.isAdult);
                                 intent.putExtra("rebote", this.rebotes);
+=======
+>>>>>>> parent of 8278539... Añadido boton reinicio
                                 activity.finish();
                                 activity.startActivity(intent);
                                 Thread.currentThread().interrupt();

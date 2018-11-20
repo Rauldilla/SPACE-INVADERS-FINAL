@@ -54,6 +54,7 @@ public class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
+<<<<<<< HEAD
 
         final Button redo = this.findViewById(R.id.redo);
         redo.setOnClickListener(new View.OnClickListener() {
@@ -73,5 +74,7 @@ public class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
+=======
+>>>>>>> parent of 8278539... Añadido boton reinicio
     }
 }
