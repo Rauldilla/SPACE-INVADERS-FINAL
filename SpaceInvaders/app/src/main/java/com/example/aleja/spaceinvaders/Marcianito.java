@@ -13,8 +13,14 @@ public class Marcianito {
     Random generator = new Random();
 
     //los invader van a ser representados por un Bitmap
-    private Bitmap bitmap1;
-    private Bitmap bitmap2;
+    private static Bitmap bitmap1;
+    private static Bitmap bitmap2;
+
+    private static Bitmap bitmap1Destructor;
+    private static Bitmap bitmap2Destructor;
+
+    private Bitmap thisBitmap1;
+    private Bitmap thisBitmap2;
 
     // Selector de bitmap
     private final int PRIMERO = 1;
@@ -61,19 +67,24 @@ public class Marcianito {
         y = row * (height + padding/2);
 
         // Inicializa el bitmap
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
-        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano2);
-
-        // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
-        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
-                (int) (length),
-                (int) (height),
-                false);
-
-        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
-                (int) (length),
-                (int) (height),
-                false);
+        if (bitmap1 == null) {
+            bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano1);
+            // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
+            bitmap1 = Bitmap.createScaledBitmap(bitmap1,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
+        if (bitmap2 == null) {
+            bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.marciano2);
+            // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
+            bitmap2 = Bitmap.createScaledBitmap(bitmap2,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
+        this.thisBitmap1 = bitmap1;
+        this.thisBitmap2 = bitmap2;
 
         // Qué tan rápido va el invader en pixeles por segundo
         shipSpeed = screenX/20;
@@ -95,19 +106,25 @@ public class Marcianito {
         y = height + padding/5;
 
         // Inicializa el bitmap
-        bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
-        bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor2);
+        if (bitmap1Destructor == null) {
+            bitmap1Destructor = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor1);
+            // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
+            bitmap1Destructor = Bitmap.createScaledBitmap(bitmap1Destructor,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
 
-        // Ajusta el primer bitmap a un tamaño apropiado para la resolución de la pantalla
-        bitmap1 = Bitmap.createScaledBitmap(bitmap1,
-                (int) (length),
-                (int) (height),
-                false);
+        if (bitmap2Destructor == null) {
+            bitmap2Destructor = BitmapFactory.decodeResource(context.getResources(), R.drawable.destructor2);
+            bitmap2Destructor = Bitmap.createScaledBitmap(bitmap2Destructor,
+                    (int) (length),
+                    (int) (height),
+                    false);
+        }
 
-        bitmap2 = Bitmap.createScaledBitmap(bitmap2,
-                (int) (length),
-                (int) (height),
-                false);
+        this.thisBitmap1 = bitmap1Destructor;
+        this.thisBitmap2 = bitmap2Destructor;
 
         // Qué tan rápido va el invader en pixeles por segundo
         shipSpeed = screenX/11;
@@ -135,9 +152,9 @@ public class Marcianito {
 
     public Bitmap getBitmap(){
         if (select == PRIMERO) {
-            return bitmap1;
+            return this.thisBitmap1;
         } else {
-            return bitmap2;
+            return this.thisBitmap2;
         }
     }
 
