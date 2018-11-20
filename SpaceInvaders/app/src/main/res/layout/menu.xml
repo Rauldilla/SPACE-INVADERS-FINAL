@@ -38,12 +38,6 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop" />
 
-    <TextureView
-            android:id="@+id/photo"
-            android:layout_width="397dp"
-            android:layout_height="163dp"
-            android:layout_alignEnd="@+id/view_ranking" android:layout_centerVertical="true"/>
-
     <Button
         android:id="@+id/view_ranking"
         android:layout_width="wrap_content"
