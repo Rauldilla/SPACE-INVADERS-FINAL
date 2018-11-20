@@ -614,7 +614,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                 final Activity activity = (Activity) getContext();
                                 Intent intent = new Intent(activity, MenuActivity.class);
                                 intent.putExtra(getResources().getString(R.string.name), this.name);
-
                                 intent.putExtra(getResources().getString(R.string.victory), true);
                                 intent.putExtra(getResources().getString(R.string.score), puntuacion);
                                 intent.putExtra("adult", isAdult);
@@ -782,9 +781,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                             final Activity activity = (Activity) getContext();
                             Intent intent = new Intent(activity, MenuActivity.class);
                             intent.putExtra(getResources().getString(R.string.name), this.name);
-
                             intent.putExtra(getResources().getString(R.string.victory), false);
                             intent.putExtra(getResources().getString(R.string.score), puntuacion);
+                            intent.putExtra("adult", isAdult);
+                            intent.putExtra("rebote", rebotes);
                             activity.finish();
                             activity.startActivity(intent);
                             Thread.currentThread().interrupt();
@@ -804,9 +804,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                         final Activity activity = (Activity) getContext();
                         Intent intent = new Intent(activity, MenuActivity.class);
                         intent.putExtra(getResources().getString(R.string.name), this.name);
-
                         intent.putExtra(getResources().getString(R.string.victory), false);
                         intent.putExtra(getResources().getString(R.string.score), puntuacion);
+                        intent.putExtra("adult", isAdult);
+                        intent.putExtra("rebote", rebotes);
                         activity.finish();
                         activity.startActivity(intent);
                         Thread.currentThread().interrupt();
