@@ -490,10 +490,15 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                         intent.putExtra(getResources().getString(R.string.victory), true);
                                         intent.putExtra(getResources().getString(R.string.score), puntuacion);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                         intent.putExtra("adult", this.isAdult);
                                         intent.putExtra("rebote", this.rebotes);
 =======
 >>>>>>> parent of 8278539... Añadido boton reinicio
+=======
+                                        intent.putExtra("adult", isAdult);
+                                        intent.putExtra("rebote", rebotes);
+>>>>>>> parent of d52268a... Añadido boton
                                         activity.finish();
                                         activity.startActivity(intent);
                                         Thread.currentThread().interrupt();
@@ -524,10 +529,15 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                     intent.putExtra(getResources().getString(R.string.victory), true);
                                     intent.putExtra(getResources().getString(R.string.score), puntuacion);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     intent.putExtra("adult", this.isAdult);
                                     intent.putExtra("rebote", this.rebotes);
 =======
 >>>>>>> parent of 8278539... Añadido boton reinicio
+=======
+                                    intent.putExtra("adult", isAdult);
+                                    intent.putExtra("rebote", rebotes);
+>>>>>>> parent of d52268a... Añadido boton
                                     activity.finish();
                                     activity.startActivity(intent);
                                     Thread.currentThread().interrupt();
@@ -578,10 +588,15 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                 intent.putExtra(getResources().getString(R.string.victory), true);
                                 intent.putExtra(getResources().getString(R.string.score), puntuacion);
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 intent.putExtra("adult", this.isAdult);
                                 intent.putExtra("rebote", this.rebotes);
 =======
 >>>>>>> parent of 8278539... Añadido boton reinicio
+=======
+                                intent.putExtra("adult", isAdult);
+                                intent.putExtra("rebote", rebotes);
+>>>>>>> parent of d52268a... Añadido boton
                                 activity.finish();
                                 activity.startActivity(intent);
                                 Thread.currentThread().interrupt();
@@ -748,10 +763,6 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                             intent.putExtra(getResources().getString(R.string.victory), false);
                             intent.putExtra(getResources().getString(R.string.score), puntuacion);
-                            intent.putExtra(getResources().getString(R.string.name), this.name);
-
-                            intent.putExtra("adult", this.isAdult);
-                            intent.putExtra("rebote", this.rebotes);
                             activity.finish();
                             activity.startActivity(intent);
                             Thread.currentThread().interrupt();
