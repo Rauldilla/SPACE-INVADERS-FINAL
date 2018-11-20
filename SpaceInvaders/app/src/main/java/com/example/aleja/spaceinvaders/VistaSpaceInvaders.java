@@ -739,6 +739,10 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                             intent.putExtra(getResources().getString(R.string.victory), false);
                             intent.putExtra(getResources().getString(R.string.score), puntuacion);
+
+                            intent.putExtra("adult", this.isAdult);
+                            intent.putExtra("rebote", this.rebotes);
+                            
                             activity.finish();
                             activity.startActivity(intent);
                             Thread.currentThread().interrupt();
