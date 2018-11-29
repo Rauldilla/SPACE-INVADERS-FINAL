@@ -6,20 +6,19 @@
                 android:orientation="vertical">
 
     <ListView
-        android:id="@+id/ranking"
-        android:layout_width="297dp"
-        android:layout_height="270dp"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+            android:id="@+id/ranking"
+            android:layout_width="451dp"
+            android:layout_height="270dp"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"/>
 
     <Button
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="65dp"
-            android:text="@string/back" />
+            android:layout_marginBottom="33dp"
+            android:text="@string/back" android:layout_alignParentEnd="true" android:layout_marginEnd="30dp"/>
 
     <ImageView
         android:id="@+id/imageView"

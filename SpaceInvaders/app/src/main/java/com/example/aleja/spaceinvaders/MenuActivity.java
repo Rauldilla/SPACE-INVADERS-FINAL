@@ -14,6 +14,8 @@ import android.widget.TextView;
 public class MenuActivity extends Activity {
     private ScoreDdHelper helper;
     private ImageView photoView;
+    private long lastRecord;
+    private ScoreDdHelper.ScoreRecordEntry lastItem;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,8 @@ public class MenuActivity extends Activity {
             }
         });
 
-        this.helper.insertNewRecord(name, score);
+        this.lastItem = new ScoreDdHelper.ScoreRecordEntry(name, score);
+        this.lastRecord = this.helper.insertNewRecord(lastItem);
 
         final Button viewRanking = this.findViewById(R.id.view_ranking);
         viewRanking.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +64,7 @@ public class MenuActivity extends Activity {
         final Button redo = this.findViewById(R.id.redo);
         redo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MenuActivity.this,SpaceInvaders.class);
+                Intent intent = new Intent(MenuActivity.this, SpaceInvaders.class);
                 Bundle extras = getIntent().getExtras();
 
                 final boolean isAdult = extras.getBoolean("adult");
@@ -91,7 +94,11 @@ public class MenuActivity extends Activity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            photoView.setImageBitmap(imageBitmap);
+            final Bitmap resized = Bitmap.createScaledBitmap(imageBitmap, 120, 160, false);
+            photoView.setImageBitmap(resized);
+
+            this.lastItem.setPhoto(Utils.encodeToBase64(resized));
+            this.helper.updatePhoto(this.lastRecord, this.lastItem);
         }
     }
 }
