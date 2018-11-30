@@ -3,7 +3,6 @@ package com.example.aleja.spaceinvaders;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,8 +14,6 @@ import android.widget.TextView;
 public class MenuActivity extends Activity {
     private ScoreDdHelper helper;
     private ImageView photoView;
-    MediaPlayer menuVMediaPlayer;
-    MediaPlayer menuDMediaPlayer;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,19 +23,12 @@ public class MenuActivity extends Activity {
 
         final ImageView imagenFinal = this.findViewById(R.id.imagen);
 
-        menuVMediaPlayer = MediaPlayer.create(this, R.raw.mvictoria);
-        menuVMediaPlayer.setLooping(true);
-        menuDMediaPlayer = MediaPlayer.create(this, R.raw.mderrota);
-        menuDMediaPlayer.setLooping(true);
-
         Bundle extras = getIntent().getExtras();
         final boolean win = extras.getBoolean(getResources().getString(R.string.victory));
         if (win) {
             imagenFinal.setImageResource(R.drawable.win);
-            menuVMediaPlayer.start();
         } else {
             imagenFinal.setImageResource(R.drawable.game_over);
-            menuDMediaPlayer.start();
         }
 
         final TextView scoreLabel = this.findViewById(R.id.score);
@@ -53,8 +43,6 @@ public class MenuActivity extends Activity {
         final Button back = this.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                menuDMediaPlayer.pause();
-                menuVMediaPlayer.pause();
                 MenuActivity.this.finish();
             }
         });
@@ -73,9 +61,6 @@ public class MenuActivity extends Activity {
         final Button redo = this.findViewById(R.id.redo);
         redo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                menuDMediaPlayer.pause();
-                menuVMediaPlayer.pause();
-
                 Intent intent = new Intent(MenuActivity.this,SpaceInvaders.class);
                 Bundle extras = getIntent().getExtras();
 
