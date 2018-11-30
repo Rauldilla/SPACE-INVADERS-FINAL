@@ -3,7 +3,6 @@ package com.example.aleja.spaceinvaders;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -27,6 +26,8 @@ public class RankingActivity extends Activity {
         });
         this.helper = new ScoreDdHelper(this);
         final ListView listView = this.findViewById(R.id.ranking);
-        listView.setAdapter(new ArrayAdapter<>(this, R.layout.ranking, this.helper.findTop10Ranking()));
+
+        final RankingListAdapter adapter = new RankingListAdapter(this, this.helper.findTop10Ranking());
+        listView.setAdapter(adapter);
     }
 }
