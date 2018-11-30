@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -16,9 +17,14 @@ import java.util.Random;
 
 
 public class VistaSpaceInvaders extends SurfaceView implements Runnable {
+
+    MediaPlayer mainMediaPlayer;
+
     Context context;
 
     Random generator = new Random();
+
+    private int hack;
     
     private boolean tocaD, tocaI, tocaAR, tocaAB;
 
@@ -128,6 +134,12 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
     // Aquí vamos a inicializar todos los objetos del juego
     private void prepararNivel() {
 
+        //Inicio de musica
+        mainMediaPlayer = MediaPlayer.create(context, R.raw.musica1);
+        mainMediaPlayer.setLooping(true);
+        mainMediaPlayer.start();
+
+        hack = 0;
 
         // Haz una nave espacial para un jugador nuevo
         nave = new Nave(context, ejeX, ejeY);
@@ -457,13 +469,34 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
             }
         }
 
+        //Hack para ganar tocando tres veces el maciano esponataneo
+        if (hack == 3){
+            mainMediaPlayer.pause();
+
+            final Activity activity = (Activity) getContext();
+            Intent intent = new Intent(activity, MenuActivity.class);
+
+            intent.putExtra(getResources().getString(R.string.victory), true);
+            intent.putExtra(getResources().getString(R.string.score), puntuacion);
+            intent.putExtra(getResources().getString(R.string.name), this.name);
+            intent.putExtra("adult", isAdult);
+            intent.putExtra("rebote", rebotes);
+            activity.finish();
+            activity.startActivity(intent);
+            Thread.currentThread().interrupt();
+        }
+
         if (pierde) {
+            mainMediaPlayer.pause();
+
             final Activity activity = (Activity) getContext();
             Intent intent = new Intent(activity, MenuActivity.class);
 
             intent.putExtra(getResources().getString(R.string.victory), false);
             intent.putExtra(getResources().getString(R.string.score), puntuacion);
             intent.putExtra(getResources().getString(R.string.name), this.name);
+            intent.putExtra("adult", isAdult);
+            intent.putExtra("rebote", rebotes);
             activity.finish();
             activity.startActivity(intent);
             Thread.currentThread().interrupt();
@@ -529,6 +562,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                     puntuacion = puntuacion + 100;
                                     // Ha ganado el jugador
                                     if (puntuacion == numMarcianitos * 100) {
+                                        mainMediaPlayer.pause();
+
                                         final Activity activity = (Activity) getContext();
                                         Intent intent = new Intent(activity, MenuActivity.class);
                                         intent.putExtra(getResources().getString(R.string.name), this.name);
@@ -560,6 +595,8 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                                 puntuacion = puntuacion + 100;
                                 // Ha ganado el jugador
                                 if (puntuacion == numMarcianitos * 100) {
+                                    mainMediaPlayer.pause();
+
                                     final Activity activity = (Activity) getContext();
                                     Intent intent = new Intent(activity, MenuActivity.class);
                                     intent.putExtra(getResources().getString(R.string.name), this.name);
@@ -611,6 +648,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                             // Ha ganado el jugador
                             if (puntuacion == numMarcianitos * 100) {
+                                mainMediaPlayer.pause();
                                 final Activity activity = (Activity) getContext();
                                 Intent intent = new Intent(activity, MenuActivity.class);
                                 intent.putExtra(getResources().getString(R.string.name), this.name);
@@ -778,6 +816,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                         // Se acabó el juego
                         if (vidas == 0) {
+                            mainMediaPlayer.pause();
                             final Activity activity = (Activity) getContext();
                             Intent intent = new Intent(activity, MenuActivity.class);
                             intent.putExtra(getResources().getString(R.string.name), this.name);
@@ -801,6 +840,7 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
 
                     // Se acabó el juego
                     if (vidas == 0) {
+                        mainMediaPlayer.pause();
                         final Activity activity = (Activity) getContext();
                         Intent intent = new Intent(activity, MenuActivity.class);
                         intent.putExtra(getResources().getString(R.string.name), this.name);
@@ -872,6 +912,12 @@ public class VistaSpaceInvaders extends SurfaceView implements Runnable {
                 if ((motionEvent.getX() > BIzquierda.getX())&&(motionEvent.getX() < BIzquierda.getX()+ BIzquierda.getLength())&&
                         (motionEvent.getY() > BIzquierda.getY())&&(motionEvent.getY() < BIzquierda.getY()+ BIzquierda.getHeight())){
                     nave.setMovementState(nave.LEFT);
+                }
+
+                //Hack para ganar tocando tres veces al marciano
+                if ((motionEvent.getX() > marcianitoEsp.getX())&&(motionEvent.getX() < marcianitoEsp.getX()+ marcianitoEsp.getLength())&&
+                        (motionEvent.getY() > marcianitoEsp.getY())&&(motionEvent.getY() < marcianitoEsp.getY()+ marcianitoEsp.getHeight())) {
+                    hack++;
                 }
 
                 break;
