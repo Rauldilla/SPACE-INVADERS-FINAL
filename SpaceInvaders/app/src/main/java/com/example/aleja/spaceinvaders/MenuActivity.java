@@ -3,6 +3,7 @@ package com.example.aleja.spaceinvaders;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -17,9 +18,18 @@ public class MenuActivity extends Activity {
     private long lastRecord;
     private ScoreDdHelper.ScoreRecordEntry lastItem;
 
+    MediaPlayer mediaPlayerVictoria;
+    MediaPlayer mediaPlayerDerrota;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         helper = new ScoreDdHelper(this);
+
+        mediaPlayerVictoria = MediaPlayer.create(this, R.raw.mvictoria);
+        mediaPlayerVictoria.setLooping(true);
+        mediaPlayerDerrota = MediaPlayer.create(this, R.raw.mderrota);
+        mediaPlayerDerrota.setLooping(true);
 
         setContentView(R.layout.menu);
 
@@ -29,8 +39,10 @@ public class MenuActivity extends Activity {
         final boolean win = extras.getBoolean(getResources().getString(R.string.victory));
         if (win) {
             imagenFinal.setImageResource(R.drawable.win);
+            mediaPlayerVictoria.start();
         } else {
             imagenFinal.setImageResource(R.drawable.game_over);
+            mediaPlayerDerrota.start();
         }
 
         final TextView scoreLabel = this.findViewById(R.id.score);
@@ -45,6 +57,8 @@ public class MenuActivity extends Activity {
         final Button back = this.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mediaPlayerDerrota.pause();
+                mediaPlayerVictoria.pause();
                 MenuActivity.this.finish();
             }
         });
@@ -64,6 +78,9 @@ public class MenuActivity extends Activity {
         final Button redo = this.findViewById(R.id.redo);
         redo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mediaPlayerDerrota.pause();
+                mediaPlayerVictoria.pause();
+
                 Intent intent = new Intent(MenuActivity.this, SpaceInvaders.class);
                 Bundle extras = getIntent().getExtras();
 

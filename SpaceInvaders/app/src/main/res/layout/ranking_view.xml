@@ -6,11 +6,11 @@
                 android:orientation="vertical">
 
     <ListView
-            android:id="@+id/ranking"
-            android:layout_width="451dp"
-            android:layout_height="270dp"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"/>
+        android:id="@+id/ranking"
+        android:layout_width="557dp"
+        android:layout_height="270dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true" />
 
     <Button
             android:id="@+id/back"
